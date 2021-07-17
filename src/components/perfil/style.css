@@ -1,0 +1,68 @@
+.site-description-item-profile-wrapper {
+  margin-bottom: 7px;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  line-height: 1.5715;
+}
+
+[data-theme='compact'] .site-description-item-profile-wrapper {
+  font-size: 12px;
+  line-height: 1.66667;
+}
+
+.ant-drawer-body p.site-description-item-profile-p {
+  display: block;
+  margin-bottom: 16px;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 16px;
+  line-height: 1.5715;
+}
+
+[data-theme='compact'] .ant-drawer-body p.site-description-item-profile-p {
+  font-size: 14px;
+  line-height: 1.66667;
+}
+
+.site-description-item-profile-p-label {
+  display: inline-block;
+  margin-right: 8px;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.bt-logout-modal {
+  border: 1px solid rgba(0, 0, 0, 0.349);
+  background: rgba(0, 0, 0, 0.349);
+  color: white;
+  padding: 5px 8px;
+  border-radius: 8px;
+}
+
+.bt-logout-modal:hover {
+  background: red;
+}
+
+.bt-perfil {
+  float: right;
+  display: inline-block;
+  border: 1px solid white;
+}
+
+.link-bt-perfil {
+  display: inline-block;
+  text-align: right;
+  padding-right: 10px!important;
+  color: white!important;
+}
+
+.input-com-mascara {
+  border-radius: 2px;
+  width: 100%;
+  max-height: 100%;
+  border: solid 1px;
+  border-color: rgba(160, 157, 157, 0.445);
+  height: 32.1px;
+}
+
+.sem-border{
+  border: none;
+}

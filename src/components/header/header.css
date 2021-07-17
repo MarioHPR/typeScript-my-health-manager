@@ -1,0 +1,59 @@
+.site-page-header {
+    background-color:  #002140 !important;
+    height: auto;
+}
+
+.div-top-header {
+    width: 100%;
+    display: flexbox;
+    justify-content: space-between;
+}
+
+.bt-logout {
+    border: none!important;
+    padding: 5px 15px;
+}
+
+.espaco-left {
+    margin-left: 5px;
+}
+
+.menu {
+    background-color: rgba(65, 99, 192, 0.534)!important;
+    color: white!important;
+    border-radius: 8px!important;
+    width: 60px;
+    height: 40px!important;
+}
+
+.bt-basico {
+    display: inline-block;
+    margin: 2vh 3vh 3vh 1vh;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.377);
+    border-radius: 0.8vh;
+    float:right;
+    font-size: 18px;
+    color: blanchedalmond;
+}
+
+.bt-basico:hover {
+    font-weight: bold;
+    background-color: darkslategrey;
+}
+
+.row-header .linkHome {
+    display: inline-block;
+    color: whitesmoke;
+    margin: 1vh 0 3vh 1vh;
+    font-size: 26px;
+}
+
+.botao-header {
+    margin-top: -10px;
+}
+
+.bt-login-abrir-caixa {
+    font-size: 16px;
+}
