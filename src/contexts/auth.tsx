@@ -6,6 +6,7 @@ import { ParametrosLogin } from '../interfaces/Usuario';
 import { useHistory } from 'react-router-dom';
 import { useCallback } from 'react';
 import {toast} from "react-toastify";
+import { useTranslation  } from 'react-i18next';
 
 export const AuthContext = createContext<AuthContextData>({} as AuthContextData,);
 
@@ -20,9 +21,10 @@ export const AuthConsumer: React.FC<{ children: (data: AuthContextData) => React
 export const AuthProvider: React.FC = ({ children }) => {
     const [user, setUser] = useState<string | null>(localStorage.getItem("token-gerenciador-security"));
     const history = useHistory();
+    const { t } = useTranslation();
 
     const notify = () => {
-        toast.error("Usuário ou senha incorreto!");
+        toast.error(t('errors.login'));
     }
 
     const signIn = useCallback(async (parametros: ParametrosLogin) => {

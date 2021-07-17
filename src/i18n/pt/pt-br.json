@@ -1,0 +1,8 @@
+{
+    "translation": {
+        "teste" : "teste aq",
+        "errors": {
+            "login" : "Usuário ou senha incorreto!"
+        }
+    }
+}
