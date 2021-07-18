@@ -70,7 +70,7 @@ export default function PerfilUsuario() {
             </a>
       }
       <Drawer
-        width={"auto"}
+        width={"600"}
         placement="right"
         closable={false}
         onClose={onClose}
@@ -131,34 +131,18 @@ export default function PerfilUsuario() {
             <Divider />
             <p className="site-description-item-profile-p">{t('perfil.subTitles.contatos')}</p>
             <Row>
-            <Col span={12}>
-                  <Form.Item name="contatoUm" label={t('perfil.contatoUm')}
-                    rules={ [ { required: usuario.contatoUm.length > 0 ? false : true, message: `Contato primário é obrigatório!` } ] }
-                  >
-                    <InputMask
-                      className="input-com-mascara sem-border"
-                      key={ `contato1e${ usuario.contatoUm }` }
-                      type='text'
-                      defaultValue={usuario.contatoUm}
-                      readOnly
-                      mask=""
-                    />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item name="contatoDois" label={t('perfil.contatoDois')}
-                    rules={ [ { required: usuario.contatoDois.length > 0 ? false : true, message: `Contato secundário é obrigatório!` } ] }
-                  >
-                    <InputMask
-                      className="input-com-mascara sem-border"
-                      key={ `contato2e${ usuario.contatoDois }` }
-                      type='text'
-                      defaultValue={usuario.contatoDois}
-                      readOnly
-                      mask=""
-                    />
-                  </Form.Item>
-                </Col>
+              <Col span={12}>
+                <DescriptionItem
+                  title={t('perfil.contatoUm')}
+                  content={usuario.contatoUm}
+                />
+              </Col>
+              <Col span={12}>
+                <DescriptionItem
+                  title={t('perfil.contatoDois')}
+                  content={usuario.contatoDois}
+                />
+              </Col>
             </Row>
           </>
         }
