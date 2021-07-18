@@ -3,6 +3,21 @@
         "teste" : "teste aq",
         "errors": {
             "login" : "Usuário ou senha incorreto!"
+        },
+        "telaLogin": {
+            "title": "Porque utilizar o gerenciador de exames?",
+            "p1": "Nosso sistema ajudará você a manter seus exames e consultas organizadas em um só lugar.",
+            "p2": "Nosso sistema tem como objetivo disponibilizar uma alternativa para você organizar seus arquivos de midia digital e fisica de forma totalmente digital.",
+            "p3": "Disponibilizando acesso de qualquer lugar para você, seja em sua casa, consultório, hospital entre outros lugares.",
+            "p4": "Com nosso sistema você levará sempre todos os seus exames e consultas cadastradas, facilitando o acompanhamento médico e até mesmo ajudando você a ter um controle sobre seus dados de saúde."
+        },
+        "login": {
+            "title": "Faça seu Login",
+            "dicaEmail": "email@gmail.com",
+            "dicaSenha": "insira sua senha",
+            "btEntrar": "Entrar",
+            "btCadastrar": "Cadastrar"
         }
+
     }
 }
