@@ -60,6 +60,7 @@
             }
         },
         "restricoes": {
+            "title": "Anotações Importantes:",
             "btAdd": "Adicionar nova anotação",
             "btCancelar": "Cancelar",
             "perguntaCancelar": "Deseja cancelar?",
