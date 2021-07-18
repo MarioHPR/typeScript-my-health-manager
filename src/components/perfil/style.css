@@ -30,15 +30,18 @@
 }
 
 .bt-logout-modal {
+  display: inline-block;
   border: 1px solid rgba(0, 0, 0, 0.349);
   background: rgba(0, 0, 0, 0.349);
   color: white;
-  padding: 5px 8px;
-  border-radius: 8px;
+  padding: 4px 8px;
+  border-radius: 2px;
+  height: 32px;
 }
 
 .bt-logout-modal:hover {
   background: red;
+  color: white;
 }
 
 .bt-perfil {
