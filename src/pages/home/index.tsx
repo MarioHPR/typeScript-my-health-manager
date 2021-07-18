@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Layout, notification, Col} from 'antd';
+import { Layout, Col} from 'antd';
 import  Header  from '../../components/header';
 import  Footer  from '../../components/footer';
 import MenuAtual from '../../components/menu';
@@ -27,13 +27,6 @@ const Home: React.FC = () => {
         setRestricoes(resp.data)} );
   },[setRestricoes, atualizaTela]);
 
-  const openNotificationWithIcon = (type:string, msg:string, descricao:string) => {
-    // notification[type]({
-    //   message: [msg],
-    //   description:[descricao],
-    //   placement:'bottomRight'
-    // });
-  };
 
   const handleDelete = (evt: any) => {
     // console.log(evt)

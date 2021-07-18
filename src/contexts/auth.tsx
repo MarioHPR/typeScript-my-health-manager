@@ -23,9 +23,9 @@ export const AuthProvider: React.FC = ({ children }) => {
     const history = useHistory();
     const { t } = useTranslation();
 
-    const notify = () => {
+    const notify = useCallback(() => {
         toast.error(t('errors.login'));
-    }
+    },[t])
 
     const signIn = useCallback(async (parametros: ParametrosLogin) => {
         try {
@@ -36,13 +36,13 @@ export const AuthProvider: React.FC = ({ children }) => {
         } catch (error) {        
             notify();
         }
-    }, [history]);
+    }, [history, notify]);
 
     const signOut = useCallback(() => {
         localStorage.removeItem('token-gerenciador-security');
         setUser(null);
         history.push("/login");
-    }, []);
+    }, [history]);
 
 
     return (

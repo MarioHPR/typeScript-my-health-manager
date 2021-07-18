@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, Input, InputNumber, Popconfirm, Form, Typography, notification } from 'antd';
+import { Table, Button, Input, InputNumber, Popconfirm, Form, Typography } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import AlergiaOuRestricoesApi from '../../models/alergiaOuRestricoesApi';
+import { useTranslation  } from 'react-i18next';
 
 const restricoesApi = new AlergiaOuRestricoesApi();
 const auth = localStorage.getItem("token-gerenciador-security");
@@ -19,6 +20,7 @@ interface Iprops {
 const TableListaRestricoes: React.FC<Iprops> = ({atualizaTela, setAtualizaTela, restricoes, setRestricoes, handleDelete}:Iprops) => {
   const [ aux, setAux ] = useState();
   const originData = [] as any;
+  const { t } = useTranslation();
 
   useEffect(()=>{
     let a = [] as any;
@@ -38,14 +40,6 @@ const TableListaRestricoes: React.FC<Iprops> = ({atualizaTela, setAtualizaTela, 
   const [editingKey, setEditingKey] = useState('');
 
   const isEditing = (record: any) => record.key === editingKey;
-
-  const openNotificationWithIcon = (type:any, msg:any, descricao:any) => {
-    // notification[type]({
-    //   message: [msg],
-    //   description:[descricao],
-    //   placement:'bottomRight'
-    // });
-  };
 
   const handleAdd = () => {
     let newCampo = { "id" : '-', "tipo": " ", "descricao" : " " };
@@ -85,7 +79,7 @@ const TableListaRestricoes: React.FC<Iprops> = ({atualizaTela, setAtualizaTela, 
         restricoesApi.criarAlergiaOuRestricoes( row, auth ).then( resp => {
           if(resp.status === 200) {
             setAtualizaTela(atualizaTela + 1);
-            openNotificationWithIcon("success", 'Inserção', 'Restrição inserida com sucesso!');
+            // openNotificationWithIcon("success", 'Inserção', 'Restrição inserida com sucesso!');
             setEditingKey('');
           }
         });
@@ -102,7 +96,7 @@ const TableListaRestricoes: React.FC<Iprops> = ({atualizaTela, setAtualizaTela, 
         restricoesApi.editarAlergiaOuRestricoes(key.key, row, auth).then( resp => {
           if(resp.status === 200) {
             setAtualizaTela(atualizaTela + 1);
-            openNotificationWithIcon("success", 'Editado', 'Restrição editado com sucesso!');
+            // openNotificationWithIcon("success", 'Editado', 'Restrição editado com sucesso!');
           }
         });
       }
@@ -144,8 +138,8 @@ const TableListaRestricoes: React.FC<Iprops> = ({atualizaTela, setAtualizaTela, 
             >
               Save
             </a>
-            <Popconfirm title="Deseja cancelar?" onConfirm={cancel}>
-              <a href='/'>Cancelar</a>
+            <Popconfirm title={t('restricoes.perguntaCancelar')} onConfirm={cancel}>
+              <a href='/'>{t('restricoes.btCancelar')}</a>
             </Popconfirm>
           </span>
         ) : (
@@ -153,8 +147,8 @@ const TableListaRestricoes: React.FC<Iprops> = ({atualizaTela, setAtualizaTela, 
             <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
               <EditOutlined  className="bt-operacao"/>
             </Typography.Link>
-            <Popconfirm title="Deseja realmente excluir?" onConfirm={() => handleDelete(record)}>
-            <Typography.Link title="Tem certeza que deseja deletar?">
+            <Popconfirm title={t('restricoes.pergunta')} onConfirm={() => handleDelete(record)}>
+            <Typography.Link title={t('restricoes.perguntaConfirmar')}>
               <DeleteOutlined />
             </Typography.Link>
             </Popconfirm>
@@ -218,7 +212,7 @@ const TableListaRestricoes: React.FC<Iprops> = ({atualizaTela, setAtualizaTela, 
   return (
     <div className='container-lista-consulta'>
       <Button onClick={handleAdd} type="primary" style={{ marginBottom: 16 }}>
-        Adicionar nova anotação
+        {t('restricoes.btAdd')}
       </Button>
       {
         aux &&

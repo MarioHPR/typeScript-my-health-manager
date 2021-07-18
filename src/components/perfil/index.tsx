@@ -8,13 +8,6 @@ import { AuthContext } from '../../contexts/auth';
 import { useTranslation  } from 'react-i18next';
 import FormUsuarioEdit from '../formUsuarioEdit';
 
-const DescriptionItem = ({ title, content }:any) => (
-  <div className="site-description-item-profile-wrapper">
-    <p className="site-description-item-profile-p-label">{title}:</p>
-    {content}
-  </div>
-);
-
 export default function PerfilUsuario() {
   const [ visible, setVisible ] = useState(false);
   const [ childrenDrawer, setChildrenDrawer ] = useState(false);
@@ -61,7 +54,7 @@ export default function PerfilUsuario() {
   return (
     <>
       {usuario &&
-        <a onClick={showDrawer} key={`a-${usuario?.nome}`} >
+        <a onClick={showDrawer} key={`a-${usuario?.nome}`} href='/#'>
               <div>
                   <Avatar style={{ backgroundColor: '#f56a00' }}>{usuario.nome[0]}</Avatar>
                   <span className='link-bt-perfil espaco-left' >{usuario.nome}</span>

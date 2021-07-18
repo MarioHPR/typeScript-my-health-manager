@@ -58,6 +58,13 @@
                 "contatoUm": "Insira seu contato principal",
                 "contatoDois": "Insira seu contato secundário"
             }
-        } 
+        },
+        "restricoes": {
+            "btAdd": "Adicionar nova anotação",
+            "btCancelar": "Cancelar",
+            "perguntaCancelar": "Deseja cancelar?",
+            "pergunta": "Deseja realmente excluir?",
+            "perguntaConfirmar": "Tem certeza que deseja excluir?"
+        }
     }
 }

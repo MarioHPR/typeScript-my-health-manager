@@ -1,6 +1,5 @@
 import Axios from 'axios';
 
-const URI = `http://localhost:8080/`;
 const URI_HEROKU = 'https:/back-geranciador-exames.herokuapp.com/';
 
 export default class AlergiaOuRestricoesApi {
