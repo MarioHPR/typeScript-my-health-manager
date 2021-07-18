@@ -1,0 +1,184 @@
+/*stilo*/
+.titulo{
+  margin-top: 3vh;
+  color: white;
+}
+
+.container-inputs {
+  width: 100%!important;
+}
+
+.container-inputs .input-padrao {
+  border: 1px solid cornflowerblue;
+  padding: 0 5px;
+  font-size: 16px;
+  background-color: whitesmoke;
+  display: inline-block;
+  width: 100%;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.tag-tamanho-total {
+  width: 100%;
+  margin-bottom: 1vh;
+  height: 50px;
+}
+
+
+.pagina-login h2,
+.pagina-login p {
+  color: white;
+  display: inline-block;
+}
+
+.container-form > input {
+  color: gray;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.ant-input-affix-wrapper {
+  padding-left: 2%;
+  color: gray!important;
+  border-radius: 5px;
+  border: 1px solid cornflowerblue;
+}
+
+.senha-cadastro-input {
+  padding-left: 2%;
+  border-radius: 5px!important;
+  border: 1px solid cornflowerblue!important;
+}
+
+.senha-cadastro-input > input {
+  font-size: 20px !important;
+  color: gray!important;
+}
+
+.fundo-azul {
+  background: #0081ff;
+  color: white;
+}
+
+
+
+.margin-top {
+  position: relative;
+  top: 7vh;
+}
+
+.margin-bottom {
+  margin-bottom: 2vh;
+}
+
+.container-botoes-navegacao {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.botao-proxima-etapa,
+.botao-etapa-anterior {
+  display: inline-block;
+  border: 1px solid #ffffff8a!important;
+  background: #0081ff!important;
+  color: white!important;
+  border-radius: 8px!important;
+  margin-top: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.botao-etapa-anterior{
+  background: rgba(255, 14, 14, 0.829)!important;
+}
+
+.botao-ir-login {
+  background: white!important;
+  color: #0081ff!important;
+}
+
+.btn-voltar,
+.tag-tamanho-total {
+  padding: 1vh 0;
+  border-radius: 4px;
+}
+
+.btn-voltar {
+  color: white;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  border: 1px solid #faf7f79f;
+}
+
+.btn-cadastrar {
+  border: 1px solid cornflowerblue;
+  cursor: pointer;
+  outline: none;
+  transition: 0.5s;
+}
+
+.btn-cadastrar:hover {
+  background-color: white;
+  color: cornflowerblue;
+}
+
+.container-checkbox {
+  display: flexbox;
+  width: auto;
+}
+
+.container-checkbox .float-right{
+  float: right;
+}
+
+.tamanho-total {
+  width: 100%;
+}
+
+@media (max-width: 1040px) {
+  .container-form h2 {
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+
+  .container-form {
+    width: 50vw;
+    height: auto;
+  }
+
+}
+
+@media (max-width: 790px) {
+  .layout-login {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .container-form {
+    width: 80%;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+@media (max-width: 500px) {
+  .layout-login {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    padding: 0;
+  }
+
+  .container-form {
+    position: relative;
+    width: 80%;
+    top: 15%;
+    padding: 5%;
+    padding-top: 2%;
+  }
+}

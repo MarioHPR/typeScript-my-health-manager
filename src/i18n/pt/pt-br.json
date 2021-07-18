@@ -46,17 +46,17 @@
             "contatoDois": "Contato secundário",
             "btEnviar": "Realizar edição",
             "placeholder": {
-                "nome" : "Insira seu nome",
-                "email": "Insira seu email",
-                "cpf": "Insira seu cpf",
-                "senha": "Insira sua senha",
-                "cidade": "Insira sua cidade",
-                "cep": "Insira seu cep",
-                "bairro": "Insira seu bairro",
-                "rua": "Insira sua rua",
-                "numero": "Insira o número da casa",
-                "contatoUm": "Insira seu contato principal",
-                "contatoDois": "Insira seu contato secundário"
+                "nome" : "Digite seu nome",
+                "email": "Digite seu email",
+                "cpf": "Digite seu cpf",
+                "senha": "Digite sua senha",
+                "cidade": "Informe sua cidade",
+                "cep": "Informe seu cep",
+                "bairro": "Informe seu bairro",
+                "rua": "Informe sua rua",
+                "numero": "Informe o número da casa",
+                "contatoUm": "Digite seu contato principal",
+                "contatoDois": "Digite seu contato secundário"
             }
         },
         "restricoes": {
@@ -66,6 +66,23 @@
             "perguntaCancelar": "Deseja cancelar?",
             "pergunta": "Deseja realmente excluir?",
             "perguntaConfirmar": "Tem certeza que deseja excluir?"
+        },
+        "steps": {
+            "processo": {
+                "step1": "Dados básicos",
+                "step2": "Onde você mora?",
+                "step3": "Informe seus contatos"
+            },
+            "titulos": {
+                "step1": "Dados pessoais:",
+                "step2": "Localização",
+                "step3": "Contatos"
+            },
+            "btLogin": "Ir para o Login",
+            "btProxima": "próxima etapa",
+            "btAnterior": "Etapa anterior",
+            "btCadastrar": "Finalizar cadastro"
         }
+
     }
 }
