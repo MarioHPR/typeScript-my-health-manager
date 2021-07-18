@@ -8,8 +8,8 @@ import { ParametrosLogin } from '../../interfaces/Usuario';
 
 const LoginUi: React.FC = () => {
 
-  const [ email, setEmail ] = useState('');
-  const [ senha, setSenha ] = useState('');
+  const [ email, setEmail ] = useState<string>('');
+  const [ senha, setSenha ] = useState<string>('');
   const { signIn } = useContext(AuthContext);
   const { t } = useTranslation();
 

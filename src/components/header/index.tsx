@@ -1,18 +1,12 @@
-import React from 'react';
 import { Row, Col } from 'antd';
-import { useHistory } from 'react-router-dom';
 import './header.css';
 import PerfilUsuario from '../perfil';
 import { LoginOutlined } from '@ant-design/icons';
+import { useTranslation  } from 'react-i18next';
 
 export default function Header (props: any) {
     const { mostrarLogin, btMostrarLogin } = props;
-    const history = useHistory();
-    const deslogar = ( event: any ) => {
-      event.preventDefault();
-      localStorage.clear();
-      history.push('/login')
-    }
+    const { t } = useTranslation();
 
     return (
       <>
@@ -25,8 +19,8 @@ export default function Header (props: any) {
                 <div className='bt-basico bt-logout'>
                 {
                   btMostrarLogin ?
-                    <p onClick={mostrarLogin} className='bt-login-abrir-caixa'>Entrar no sistema <LoginOutlined /></p> :
-                    <PerfilUsuario deslogar={deslogar}/>
+                    <p onClick={mostrarLogin} className='bt-login-abrir-caixa'>{t('header.btEntrar')} <LoginOutlined /></p> :
+                    <PerfilUsuario />
                 }
                </div>    
               </Col>

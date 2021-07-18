@@ -41,6 +41,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     const signOut = useCallback(() => {
         localStorage.removeItem('token-gerenciador-security');
         setUser(null);
+        history.push("/login");
     }, []);
 
 

@@ -2,7 +2,11 @@
     "translation": {
         "teste" : "teste aq",
         "errors": {
-            "login" : "Usuário ou senha incorreto!"
+            "login" : "Usuário ou senha incorreto!",
+            "obrigatorio": "Campo é obrigatório!"
+        },
+        "header":{
+            "btEntrar": "Entrar no sistema"
         },
         "telaLogin": {
             "title": "Porque utilizar o gerenciador de exames?",
@@ -17,7 +21,43 @@
             "dicaSenha": "insira sua senha",
             "btEntrar": "Entrar",
             "btCadastrar": "Cadastrar"
-        }
-
+        },
+        "perfil": {
+            "btSair": "Logout ( Sair )",
+            "btEditar": "Editar perfil",
+            "title": "Dados do usuário",
+            "titleEdit": "Edição dados usuário",
+            "nome": "Nome",
+            "email": "E-mail",
+            "cpf": "Cpf",
+            "pais": "País",
+            "dataNasc": "Data nascimento",
+            "novaSenha": "Nova senha",
+            "subTitles": {
+                "endereco": "Endereço",
+                "contatos": "Contatos"
+            },
+            "cidade": "Cidade",
+            "cep": "Cep",
+            "bairro": "Bairro",
+            "rua": "Rua",
+            "numero": "Número",
+            "contatoUm": "Contato principal",
+            "contatoDois": "Contato secundário",
+            "btEnviar": "Realizar edição",
+            "placeholder": {
+                "nome" : "Insira seu nome",
+                "email": "Insira seu email",
+                "cpf": "Insira seu cpf",
+                "senha": "Insira sua senha",
+                "cidade": "Insira sua cidade",
+                "cep": "Insira seu cep",
+                "bairro": "Insira seu bairro",
+                "rua": "Insira sua rua",
+                "numero": "Insira o número da casa",
+                "contatoUm": "Insira seu contato principal",
+                "contatoDois": "Insira seu contato secundário"
+            }
+        } 
     }
 }
