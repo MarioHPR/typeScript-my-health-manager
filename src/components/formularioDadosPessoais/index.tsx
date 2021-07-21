@@ -58,7 +58,8 @@ const FormularioDadosPessoais: React.FC<IpropStep> = ({ mudarStep, request }) =>
         request.email = email.toLowerCase();
         request.senha = senha;
     }
-}, [cpf, nome, email, senha, dataNascimento]);
+  // eslint-disable-next-line
+  }, [cpf, nome, email, senha, dataNascimento]);
 
   return (
     <div className="container-form margin-top container-form-infos">

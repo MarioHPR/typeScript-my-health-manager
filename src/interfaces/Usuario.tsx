@@ -13,6 +13,21 @@ export interface UsuarioRequest {
     numero?: number
 }
 
+export const INITIAL_REQUEST: UsuarioRequest = {
+    nome: "",
+    dataNascimento: "",
+    cpf: "",
+    email: "",
+    senha: "",
+    contatoUm: "",
+    contatoDois: "",
+    cidade: "",
+    cep: "",
+    bairro: "",
+    rua: "",
+    numero: 0
+}
+
 export interface Step1 {
     nome: string,
     cpf: string,

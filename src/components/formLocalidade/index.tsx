@@ -48,6 +48,7 @@ const FormularioLocalidade: React.FC<IpropStep> = ({ mudarStep, request }) => {
         request.rua = rua;
         request.numero = numero;
     }
+  // eslint-disable-next-line
   }, [cidade, cep, bairro, rua, numero]);
 
   return (

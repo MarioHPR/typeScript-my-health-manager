@@ -4,6 +4,7 @@ import { ParametrosLogin, Step1, UsuarioRequest } from "./Usuario";
 export interface AuthContextData {
     signIn(userLogin: ParametrosLogin): Promise<void>;
     signOut(): void;
+    cadastrarUsuario(request:UsuarioRequest): Promise<void>;
     user: string | null;
 }
 

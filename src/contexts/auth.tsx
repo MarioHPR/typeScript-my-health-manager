@@ -2,7 +2,7 @@ import React, { createContext, useState, ReactNode } from 'react';
 import api from '../services/api';
 
 import { AuthContextData } from '../interfaces/ParametrosRequestTypes';
-import { ParametrosLogin } from '../interfaces/Usuario';
+import { ParametrosLogin, UsuarioRequest } from '../interfaces/Usuario';
 import { useHistory } from 'react-router-dom';
 import { useCallback } from 'react';
 import {toast} from "react-toastify";
@@ -44,9 +44,18 @@ export const AuthProvider: React.FC = ({ children }) => {
         history.push("/login");
     }, [history]);
 
+    const cadastrarUsuario = useCallback(async (request:UsuarioRequest) => {
+        try {
+            await api.post('/api/usuario/salvar', JSON.stringify(request));
+            history.push("/login");
+        } catch (error) {        
+            notify();
+        }
+     },[history, notify]);
+
 
     return (
-        <AuthContext.Provider value={{ user, signIn, signOut }}>
+        <AuthContext.Provider value={{ user, signIn, signOut, cadastrarUsuario }}>
             {children}
         </AuthContext.Provider>
     );

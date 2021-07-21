@@ -39,6 +39,7 @@ const FormularioContato: React.FC<IpropStep> = ({ mudarStep, request, handleSubm
         request.contatoUm = contatoUm;
         request.contatoDois = contatoDois;
     }
+  // eslint-disable-next-line
   }, [contatoUm, contatoDois]);
 
   return (

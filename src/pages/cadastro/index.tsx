@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Layout } from 'antd';
-import { useHistory } from 'react-router-dom';
 import { Row, Col, Form } from 'antd';
 import  Header  from '../../components/header';
 import  Footer  from '../../components/footer';
@@ -11,31 +10,19 @@ import FormularioContato from '../../components/formContato';
 import StepsUsuario from '../../components/steps';
 import { useTranslation } from 'react-i18next';
 import { useCallback } from 'react';
-import { UsuarioRequest } from '../../interfaces/Usuario';
-import UsuarioApi from '../../models/usuarioApi';
+import { INITIAL_REQUEST, UsuarioRequest } from '../../interfaces/Usuario';
+import { AuthContext } from '../../contexts/auth';
 
 
 const { Content } = Layout;
 
 const Cadastro: React.FC = () => {
-  const history = useHistory();
   const { t } = useTranslation();
+  const { cadastrarUsuario } = useContext(AuthContext);
+
   const [form] = Form.useForm();
   const [ step, setStep ] = useState<number>(0);
-  const [ request ] =  useState<UsuarioRequest>({
-    nome: "",
-    dataNascimento: "",
-    cpf: "",
-    email: "",
-    senha: "",
-    contatoUm: "",
-    contatoDois: "",
-    cidade: "",
-    cep: "",
-    bairro: "",
-    rua: "",
-    numero: 0
-});
+  const [ request ] =  useState<UsuarioRequest>(INITIAL_REQUEST);
 
   const [ collapsed2, setCollapsed2 ] = useState(true);
   const toggleCollapsed = () => {
@@ -43,13 +30,8 @@ const Cadastro: React.FC = () => {
   };
 
   const handleSubmit = useCallback(() => {
-    const usuarioApi = new UsuarioApi();
-    usuarioApi.criarUsuario(request).then( resposta => {
-        if( resposta.status === 200 )
-          history.push('/login');
-      })
-    console.log(request)
-  },[history]);
+    cadastrarUsuario(request)
+  },[cadastrarUsuario,request]);
 
   const mudarStep = (value: number) => {
       setStep(value);
@@ -61,7 +43,7 @@ const Cadastro: React.FC = () => {
         <Header className="site-layout-background" collapsed={ collapsed2 } toggleCollapsed={ toggleCollapsed } />
           <Content className="pagina-padrao" style={{ margin: '0 1px' }}>
             <StepsUsuario step={step} />
-            <h2 className='titulo-principal'>Cadastro Usuário:</h2>
+            <h2 className='titulo-principal'>{t('perfil.cadastro')}</h2>
             <Form form={form} name="control-hooks" onFinish={()=>{}}>
               <Row>
                 <Col xs={{span:24}}>

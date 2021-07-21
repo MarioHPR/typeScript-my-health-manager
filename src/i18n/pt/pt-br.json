@@ -1,6 +1,5 @@
 {
     "translation": {
-        "teste" : "teste aq",
         "errors": {
             "login" : "Usuário ou senha incorreto!",
             "obrigatorio": "Campo é obrigatório!"
@@ -27,6 +26,7 @@
             "btEditar": "Editar perfil",
             "title": "Dados do usuário",
             "titleEdit": "Edição dados usuário",
+            "cadastro": "Cadastro Usuário:",
             "nome": "Nome",
             "email": "E-mail",
             "cpf": "Cpf",
