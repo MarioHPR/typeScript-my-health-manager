@@ -7,7 +7,7 @@ import InputMask from 'react-input-mask';
 import Lista from '../lista';
 import { useTranslation } from 'react-i18next';
 import { IpropStep } from '../../interfaces/PropsSteps';
-import { dataValida, localeDateToISO, verificaEmailInvalido, verificaSenhaInvalida} from '../../utils/Validador';
+import { localeDateToISO } from '../../utils/Validador';
 
 const FormularioDadosPessoais: React.FC<IpropStep> = ({ mudarStep, request }) => {
   const { t } = useTranslation();
@@ -17,9 +17,9 @@ const FormularioDadosPessoais: React.FC<IpropStep> = ({ mudarStep, request }) =>
   const [ email, setEmail ] = useState<string>(request?.email ? request.email : "");
   const [ senha, setSenha ] = useState<string>(request?.senha ? request.senha : "");
 
-  const [ mensagemDataNascimento, setMensagemDataNascimento ] = useState<string>("");
-  const [ mensagemEmail, setMensagemEmail ] = useState<string>("");
-  const [ mensagemSenha, setMensagemSenha ] = useState<string>("");
+  // const [ mensagemDataNascimento, setMensagemDataNascimento ] = useState<string>("");
+  // const [ mensagemEmail, setMensagemEmail ] = useState<string>("");
+  // const [ mensagemSenha, setMensagemSenha ] = useState<string>("");
 
   
   const linha = ( item: any, i: any ) => {
@@ -41,9 +41,9 @@ const FormularioDadosPessoais: React.FC<IpropStep> = ({ mudarStep, request }) =>
   const validaCampos = useMemo(() => {
     if(cpf !== "" && nome !== "" && email !== "" && 
     senha !== "" &&  dataNascimento !== "") {
-        setMensagemDataNascimento(dataValida(dataNascimento));
-        setMensagemEmail(verificaEmailInvalido(email));
-        setMensagemSenha(verificaSenhaInvalida(senha));
+        // setMensagemDataNascimento(dataValida(dataNascimento));
+        // setMensagemEmail(verificaEmailInvalido(email));
+        // setMensagemSenha(verificaSenhaInvalida(senha));
         return true;
     }
     return false;
