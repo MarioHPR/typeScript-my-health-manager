@@ -1,35 +1,23 @@
-import Axios from 'axios';
-
-const URI_HEROKU = 'https:/back-geranciador-exames.herokuapp.com/';
-
-export default class UsuarioApi {
-
-  // ###### USUARIO #####
-  async buscarDadosDoUsuario(auth:any) {
-    Axios.defaults.headers.Authorization = auth;
-    const response = await Axios.get( `${URI_HEROKU}api/usuario/buscar-dados` );
-    return response;
-  }
+import { ParametrosLogin, UsuarioRequest, UsuarioResponse } from '../interfaces/Usuario';
+import {ApiService}  from '../services/api';
 
 
-  async criarUsuario( usuario:any ) {
-    Axios.defaults.headers.Authorization = "";
-    const response = await Axios.post( `${URI_HEROKU}api/usuario/salvar`, usuario );
-    return response;
-  }
+export const buscarDadosDoUsuario = async () => {
+  const response: UsuarioResponse = (await ApiService.get( `api/usuario/buscar-dados` )).data;
+  return  response;
+}
 
-  async editarUsuario( usuario:any, auth:any ) {
-    Axios.defaults.headers.Authorization = auth;
-    const response = await Axios.put( `${URI_HEROKU}api/usuario/editar`, usuario );
-    return response;
-  }
+export const criarUsuario = async (usuario: UsuarioRequest) => {
+  const response = await ApiService.post( `api/usuario/salvar`, JSON.stringify(usuario) );
+  return  response;
+}
 
-  async realizarLogin(email:any, senha:any) {
-    //const response = await Axios.post(`${URI}login`,
-    const response = await Axios.post(`${URI_HEROKU}login`,
-      { email: email, senha: senha }
-    );
-    return response;
-  }
+export const editarUsuario = async ( usuario: UsuarioRequest ) => {
+  const response: UsuarioResponse = await ApiService.put( `api/usuario/editar`, JSON.stringify(usuario) );
+  return  response;
+}
 
+export const realizarLogin = async ( parametros: ParametrosLogin ) => {
+  const response = await ApiService.post( `login`, JSON.stringify(parametros) );
+  return  response;
 }

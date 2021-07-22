@@ -1,12 +1,13 @@
 import { Drawer, Button, Avatar, Col, Row } from 'antd';
 import { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import UsuarioApi from '../../models/usuarioApi';
 import './style.css';
 import { UsuarioResponse } from '../../interfaces/Usuario';
 import { AuthContext } from '../../contexts/auth';
 import { useTranslation  } from 'react-i18next';
 import FormUsuarioEdit from '../formUsuarioEdit';
+import { buscarDadosDoUsuario, editarUsuario } from '../../models/usuarioApi';
+import { useCallback } from 'react';
 
 export default function PerfilUsuario() {
   const [ visible, setVisible ] = useState(false);
@@ -37,16 +38,18 @@ export default function PerfilUsuario() {
   };
 
   const onFinish = () => {
-    const auth = localStorage.getItem("token-gerenciador-security");
-    const usuarioApi = new UsuarioApi();
-    usuarioApi.editarUsuario(usuario, auth).then( resp => console.log(resp));
+    usuario && editarUsuario(usuario);
     onChildrenDrawerClose();
   }
 
+  const buscarDadosUsuario = useCallback( async () => {
+    const response = await buscarDadosDoUsuario();
+    setUsuario(response);
+  },[setUsuario]);
+
   useEffect(()=>{
-    const auth = localStorage.getItem("token-gerenciador-security");
-    const usuarioApi = new UsuarioApi();
-    usuarioApi.buscarDadosDoUsuario(auth).then( resp => setUsuario(resp.data) );
+    
+    buscarDadosUsuario();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
     

@@ -1,5 +1,4 @@
 import React, { createContext, useState, ReactNode } from 'react';
-import api from '../services/api';
 
 import { AuthContextData } from '../interfaces/ParametrosRequestTypes';
 import { ParametrosLogin, UsuarioRequest } from '../interfaces/Usuario';
@@ -7,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { useCallback } from 'react';
 import {toast} from "react-toastify";
 import { useTranslation  } from 'react-i18next';
+import { criarUsuario, realizarLogin } from '../models/usuarioApi';
 
 export const AuthContext = createContext<AuthContextData>({} as AuthContextData,);
 
@@ -29,7 +29,8 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     const signIn = useCallback(async (parametros: ParametrosLogin) => {
         try {
-            const response = await api.post('/login', parametros);
+            // const response = await ApiService.post('/login', parametros);
+            const response = await realizarLogin(parametros);
             localStorage.setItem("token-gerenciador-security", response.headers.authorization);
             setUser(response.headers.authorization)
             history.push("/");
@@ -46,7 +47,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     const cadastrarUsuario = useCallback(async (request:UsuarioRequest) => {
         try {
-            await api.post('/api/usuario/salvar', JSON.stringify(request));
+            await criarUsuario(request);
             history.push("/login");
         } catch (error) {        
             notify();
