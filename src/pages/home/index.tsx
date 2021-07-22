@@ -1,32 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Layout, Col} from 'antd';
 import  Header  from '../../components/header';
 import  Footer  from '../../components/footer';
 import MenuAtual from '../../components/menu';
 import TableListaRestricoes from '../../components/tableListaRestricoes';
-import AlergiaOuRestricoesApi from '../../models/alergiaOuRestricoesApi';
 import { useTranslation  } from 'react-i18next';
-
-const restricoesApi = new AlergiaOuRestricoesApi();
-const auth = localStorage.getItem("token-gerenciador-security");
+import { listar } from '../../services/alergiaRestricaoApi';
+import { AlergiaRestricao } from '../../interfaces/AlergiaRestricao';
+import {toast} from "react-toastify";
 
 const { Content } = Layout;
 
 const Home: React.FC = () => {
   const [ collapsed2, setCollapsed2 ] = useState(true);
-  const [ restricoes, setRestricoes ] = useState([]);
+  const [ restricoes, setRestricoes ] = useState<AlergiaRestricao[]>([]);
   const [ atualizaTela, setAtualizaTela ] = useState(0);
   const { t } = useTranslation();
+
+  const notify = useCallback(() => {
+    toast.error(t('errors.login'));
+  },[t])
 
   const toggleCollapsed = () => {
     setCollapsed2(!collapsed2);
   };
   const [ aux, setAux ] = useState([]);
 
-  useEffect(()=>{
-    restricoesApi.buscarAlergiaOuRestricoes(auth)
-      .then( resp => {
-        setRestricoes(resp.data)} );
+  const listagemRestricoes = useCallback(async () => {
+    try {
+      const respo: AlergiaRestricao[] = await listar();
+      setRestricoes(respo);
+    } catch (error) {        
+        notify();
+    }
+ },[notify]);
+
+  useEffect( () => {
+    listagemRestricoes();
+    // eslint-disable-next-line
   },[setRestricoes, atualizaTela]);
 
 
