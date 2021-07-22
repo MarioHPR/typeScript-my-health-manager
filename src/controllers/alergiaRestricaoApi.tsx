@@ -1,5 +1,5 @@
 import { AlergiaRestricao, AlergiaRestricaoRequest } from '../interfaces/AlergiaRestricao';
-import {ApiService}  from './api';
+import {ApiService}  from '../services/api';
 
 
 export const listar = async () => {

@@ -6,7 +6,7 @@ import { UsuarioResponse } from '../../interfaces/Usuario';
 import { AuthContext } from '../../contexts/auth';
 import { useTranslation  } from 'react-i18next';
 import FormUsuarioEdit from '../formUsuarioEdit';
-import { buscarDadosDoUsuario, editarUsuario } from '../../models/usuarioApi';
+import { buscarDadosDoUsuario, editarUsuario } from '../../controllers/usuarioApi';
 import { useCallback } from 'react';
 
 export default function PerfilUsuario() {

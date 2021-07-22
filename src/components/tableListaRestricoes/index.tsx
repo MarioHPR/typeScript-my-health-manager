@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Table, Button, Input, InputNumber, Popconfirm, Form, Typography } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import AlergiaOuRestricoesApi from '../../models/alergiaOuRestricoesApi';
 import { useTranslation  } from 'react-i18next';
-
-const restricoesApi = new AlergiaOuRestricoesApi();
-const auth = localStorage.getItem("token-gerenciador-security");
-
+import { addNovo, editar } from '../../controllers/alergiaRestricaoApi';
+import { toast } from 'react-toastify';
 interface Iprops {
   aux?:any;
   setAux?:any;
@@ -21,6 +18,10 @@ const TableListaRestricoes: React.FC<Iprops> = ({atualizaTela, setAtualizaTela, 
   const [ aux, setAux ] = useState();
   const originData = [] as any;
   const { t } = useTranslation();
+
+  const notifySucess = useCallback(() => {
+    toast.success(t('Editado com sucesso!'));
+  },[t])
 
   useEffect(()=>{
     let a = [] as any;
@@ -76,13 +77,13 @@ const TableListaRestricoes: React.FC<Iprops> = ({atualizaTela, setAtualizaTela, 
     try {
       const row = await form.validateFields();
       if(key.key === '-') {
-        restricoesApi.criarAlergiaOuRestricoes( row, auth ).then( resp => {
-          if(resp.status === 200) {
-            setAtualizaTela(atualizaTela + 1);
-            // openNotificationWithIcon("success", 'Inserção', 'Restrição inserida com sucesso!');
-            setEditingKey('');
-          }
-        });
+        try{
+          await addNovo(row);
+          setAtualizaTela(atualizaTela + 1);
+          setEditingKey('');
+        }catch(error){
+
+        }
       }
       else {
         const newData = [...data];
@@ -93,12 +94,14 @@ const TableListaRestricoes: React.FC<Iprops> = ({atualizaTela, setAtualizaTela, 
         }
         setData(newData);
         setEditingKey('');
-        restricoesApi.editarAlergiaOuRestricoes(key.key, row, auth).then( resp => {
-          if(resp.status === 200) {
-            setAtualizaTela(atualizaTela + 1);
+        try{
+          await editar(key.key, row);
+          setAtualizaTela(atualizaTela + 1);
+          notifySucess();
+        }catch (errInfo) {
+      
+        }
             // openNotificationWithIcon("success", 'Editado', 'Restrição editado com sucesso!');
-          }
-        });
       }
     } catch (errInfo) {
       

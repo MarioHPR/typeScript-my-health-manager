@@ -5,7 +5,7 @@ import  Footer  from '../../components/footer';
 import MenuAtual from '../../components/menu';
 import TableListaRestricoes from '../../components/tableListaRestricoes';
 import { useTranslation  } from 'react-i18next';
-import { listar } from '../../services/alergiaRestricaoApi';
+import { excluir, listar } from '../../controllers/alergiaRestricaoApi';
 import { AlergiaRestricao } from '../../interfaces/AlergiaRestricao';
 import {toast} from "react-toastify";
 
@@ -21,10 +21,14 @@ const Home: React.FC = () => {
     toast.error(t('errors.login'));
   },[t])
 
+  const notifySucess = useCallback(() => {
+    toast.success(t('Deletado com sucesso!'));
+  },[t])
+
   const toggleCollapsed = () => {
     setCollapsed2(!collapsed2);
   };
-  const [ aux, setAux ] = useState([]);
+  const [ aux, setAux ] = useState<[]>([]);
 
   const listagemRestricoes = useCallback(async () => {
     try {
@@ -41,16 +45,15 @@ const Home: React.FC = () => {
   },[setRestricoes, atualizaTela]);
 
 
-  const handleDelete = (evt: any) => {
-    // console.log(evt)
-    // restricoesApi.removerConsulta(evt.key, auth).then( resp => {
-    //   if( resp.status === 200 ){
-    //     setAux(resp.data.filter( (item) => item.key !== evt ) );
-    //     openNotificationWithIcon("success", 'Exclusão', 'Restrição excluída com sucesso!');
-    //     let auxAtualiza = atualizaTela + 1;
-    //     setAtualizaTela(auxAtualiza);
-    //   }
-    // },(error) => { openNotificationWithIcon('error', 'Não foi possivel', 'Não foi possivel realizar a exclusão!'); });
+  const handleDelete = async (evt: any) => {
+    try{
+      await excluir(evt.key);
+      let auxAtualiza = atualizaTela + 1;
+      setAtualizaTela(auxAtualiza);
+      notifySucess();
+    }catch(error) {
+      notify();
+    }
   };
 
   return (
