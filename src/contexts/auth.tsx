@@ -58,7 +58,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         } catch (error) {        
             notify();
         }
-     },[history, notify]);
+     },[history, notify, notifySucess]);
 
 
     return (

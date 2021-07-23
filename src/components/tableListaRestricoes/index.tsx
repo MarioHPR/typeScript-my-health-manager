@@ -19,8 +19,12 @@ const TableListaRestricoes: React.FC<Iprops> = ({atualizaTela, setAtualizaTela, 
   const originData = [] as any;
   const { t } = useTranslation();
 
-  const notifySucess = useCallback(() => {
-    toast.success(t('Editado com sucesso!'));
+  const notifySucess = useCallback((texto: string) => {
+    toast.success(t(`${texto} com sucesso!`));
+  },[t])
+
+  const notifyError = useCallback((texto: string) => {
+    toast.error(t(`Erro ao ${texto}!`));
   },[t])
 
   useEffect(()=>{
@@ -73,38 +77,33 @@ const TableListaRestricoes: React.FC<Iprops> = ({atualizaTela, setAtualizaTela, 
   };
 
   const save = async (key:any) => {
-    console.log(key)
-    try {
-      const row = await form.validateFields();
-      if(key.key === '-') {
-        try{
-          await addNovo(row);
-          setAtualizaTela(atualizaTela + 1);
-          setEditingKey('');
-        }catch(error){
-
-        }
-      }
-      else {
-        const newData = [...data];
-        const index = newData.findIndex((item) => key === item.key);
-        if (index > -1) {
-          const item = newData[index];
-          newData.splice(index, 1, { ...item, ...row });
-        }
-        setData(newData);
+    const row = await form.validateFields();
+    if(key.key === '-') {
+      try{
+        await addNovo(row);
+        setAtualizaTela(atualizaTela + 1);
         setEditingKey('');
-        try{
-          await editar(key.key, row);
-          setAtualizaTela(atualizaTela + 1);
-          notifySucess();
-        }catch (errInfo) {
-      
-        }
-            // openNotificationWithIcon("success", 'Editado', 'Restrição editado com sucesso!');
+        notifySucess("Adicionado");
+      }catch(error){
+        notifyError("adicionar!")
       }
-    } catch (errInfo) {
-      
+    }
+    else {
+      const newData = [...data];
+      const index = newData.findIndex((item) => key === item.key);
+      if (index > -1) {
+        const item = newData[index];
+        newData.splice(index, 1, { ...item, ...row });
+      }
+      setData(newData);
+      setEditingKey('');
+      try{
+        await editar(key.key, row);
+        setAtualizaTela(atualizaTela + 1);
+        notifySucess("Editado");
+      }catch (errInfo) {
+        notifyError("editar!")
+      }
     }
   };
 
