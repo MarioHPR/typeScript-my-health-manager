@@ -4,13 +4,20 @@ import { EnderecoRequest } from "./Endereco";
 export interface InstituicaoRequest {
     id: number;
     nome: string;
-    contato: ContatoRequest;
-    endereco: EnderecoRequest;
+    contatoDTO: ContatoRequest;
+    enderecoDTO: EnderecoRequest;
 }
 
 export interface InstituicaoResponse {
     id: number;
     nome: string;
-    contato: ContatoRequest;
-    endereco: EnderecoRequest;
+    contatoDTO: ContatoRequest;
+    enderecoDTO: EnderecoRequest;
 }
+
+export interface TableInstituicao {
+    key: string;
+    nome: string;
+    cidade: string;
+    contato: string;
+  }

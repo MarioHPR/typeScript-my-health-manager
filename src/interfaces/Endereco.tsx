@@ -5,4 +5,5 @@ export interface EnderecoRequest {
     bairro: string;
     rua: string;
     numero: number;
+    flgEnderecoDoUsuario: false;
 }
