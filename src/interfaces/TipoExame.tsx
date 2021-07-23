@@ -17,3 +17,8 @@ export interface TipoExameResponse {
     nomeExame: string;
     quantidade: number;
 }
+
+export interface TipoExameRequest {
+    id: number;
+    nomeExame: string;
+}

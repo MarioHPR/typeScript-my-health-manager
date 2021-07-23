@@ -33,7 +33,7 @@ const Instituicoes: React.FC = () => {
     } catch(error){
       notifyError(t('errors.instituicoes'))
     }
-  },[notifyError]);
+  },[notifyError, t]);
 
   useEffect(()=>{
     getInstituicoes();
@@ -48,7 +48,7 @@ const Instituicoes: React.FC = () => {
     } catch(error){
       notifyError(t('errors.removeInstituicao'))
     }
-  },[aux, setAux, notifySucess, notifyError]);
+  },[aux, setAux, notifySucess, notifyError, t]);
 
   const [ collapsed2, setCollapsed2 ] = useState(true);
   const toggleCollapsed = () => {
