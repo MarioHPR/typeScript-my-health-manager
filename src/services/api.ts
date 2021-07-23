@@ -8,6 +8,7 @@ export const ApiService: AxiosInstance = axios.create({
       'Content-Type': 'application/json;charset=UTF-8',
       "Access-Control-Allow-Origin": "*",
       'Accept-Language': 'pt, pt-BR',
+      "Authorization": ' '
   }
 });
 
@@ -22,7 +23,7 @@ ApiService.interceptors.request.use(
     if (token && config.url) {
       config.headers = {
         ...config.headers,
-        Authorization: token ? token : '',
+        Authorization: token ? token : " ",
       }
     }
     return config;

@@ -8,8 +8,7 @@ export const buscarDadosDoUsuario = async () => {
 }
 
 export const criarUsuario = async (usuario: UsuarioRequest) => {
-  const response = await ApiService.post( `api/usuario/salvar`, JSON.stringify(usuario) );
-  return  response;
+  await ApiService.post( `api/usuario/salvar`, JSON.stringify(usuario) );
 }
 
 export const editarUsuario = async ( usuario: UsuarioRequest ) => {

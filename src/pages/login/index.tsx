@@ -11,7 +11,7 @@ import { useTranslation  } from 'react-i18next';
 const { Content } = Layout;
 const Login: React.FC = () => {
   const { t } = useTranslation();
-  const [flg, setFlg ] = useState(true);
+  const [flg, setFlg ] = useState<boolean>(true);
   const [ collapsed2, setCollapsed2 ] = useState(false);
   const toggleCollapsed = () => {
     setCollapsed2(!collapsed2);

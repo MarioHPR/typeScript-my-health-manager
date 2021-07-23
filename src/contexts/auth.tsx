@@ -27,6 +27,10 @@ export const AuthProvider: React.FC = ({ children }) => {
         toast.error(t('errors.login'));
     },[t])
 
+    const notifySucess = useCallback(() => {
+        toast.success(t('Cadastrado com sucesso!'));
+    },[t])
+
     const signIn = useCallback(async (parametros: ParametrosLogin) => {
         try {
             const response = await realizarLogin(parametros);
@@ -47,7 +51,10 @@ export const AuthProvider: React.FC = ({ children }) => {
     const cadastrarUsuario = useCallback(async (request:UsuarioRequest) => {
         try {
             await criarUsuario(request);
-            history.push("/login");
+            notifySucess();
+            setTimeout(() => {
+                history.push("/login");
+            },3000);
         } catch (error) {        
             notify();
         }
