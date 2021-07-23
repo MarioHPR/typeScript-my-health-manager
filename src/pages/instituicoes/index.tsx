@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Col, Layout } from 'antd';
 import { toast } from 'react-toastify';
+import { useTranslation  } from 'react-i18next';
 import  Header  from '../../components/header';
 import  Footer  from '../../components/footer';
 import MenuAtual from '../../components/menu';
@@ -13,13 +14,14 @@ const { Content } = Layout;
 const Instituicoes: React.FC = () => {
   const [ instituicoes, setInstituicoes ] = useState<InstituicaoResponse[]>([]);
   const [ atualizaTela, setAtualizaTela ] = useState<number>(0);
+  const { t } = useTranslation();
   
   const notifyError = useCallback((texto:string) => {
-    toast.error((`Erro operação ${texto}!`));
+    toast.error(texto);
   },[])
 
   const notifySucess = useCallback((texto:string) => {
-      toast.success((`${texto} com sucesso!`));
+      toast.success(texto);
   },[])
 
   const [ aux, setAux ] = useState<TableInstituicao[]>([]);
@@ -29,7 +31,7 @@ const Instituicoes: React.FC = () => {
       const response = await buscarInstituicoes();
       setInstituicoes(response)
     } catch(error){
-      notifyError("listagem de instituições")
+      notifyError(t('errors.instituicoes'))
     }
   },[notifyError]);
 
@@ -42,9 +44,9 @@ const Instituicoes: React.FC = () => {
     try{
       await deletarInstituicao(evt);
       setAux(aux.filter( (item) => item.key !== evt ) );
-      notifySucess("Instituição excluída")
+      notifySucess(t('instituicoes.msg.remove'))
     } catch(error){
-      notifyError("Não foi possivel', 'Não foi possivel realizar a exclusão!")
+      notifyError(t('errors.removeInstituicao'))
     }
   },[aux, setAux, notifySucess, notifyError]);
 
@@ -61,7 +63,7 @@ const Instituicoes: React.FC = () => {
           <Header className="site-layout-background" collapsed={ collapsed2 } toggleCollapsed={ toggleCollapsed } />
           <Content className="pagina-padrao" style={{ margin: '0 1px' }}>
             <Col xs={{span:24}}>
-              <h2 className='titulo-consulta'>Instituições:</h2>
+              <h2 className='titulo-consulta'>{t('instituicoes.title')}</h2>
             </Col>
             <Col xs={{span:24}}>
                 {instituicoes !== [] && <TableInstituicaoDados aux={aux} setAux={setAux} handleDelete={handleDelete}  atualizaTela={atualizaTela} setAtualizaTela={setAtualizaTela} instituicoes={instituicoes}/>}

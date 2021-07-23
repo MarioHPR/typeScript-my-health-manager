@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Table, Popconfirm } from 'antd';
+import { useTranslation  } from 'react-i18next';
 import './style.css';
 import ModalVisualizarEditarInstituicao  from '../modalVisualizarEditarInstituicao';
 import ModalAddInstituicao from '../modalAddInstituicao';
@@ -21,6 +22,7 @@ export default function TableInstituicaoDados( {instituicoes, atualizaTela, setA
   const [ visibleAdd, setVisibleAdd ] = useState<boolean>(false);
   const [ idInstituicao, setIdInstituicao ] = useState<number>();
   const [ flgEdit, setFlgEdit ] = useState<number>(0);
+  const { t } = useTranslation();
 
   const columns = [
     { title: "Id", dataIndex: "key" }, 
@@ -76,7 +78,7 @@ export default function TableInstituicaoDados( {instituicoes, atualizaTela, setA
   return (
     <div className='container-lista-consulta'>
       <a key='add' href='#/' onClick={() => {setVisibleAdd(true)}} className='bt-geral bt-cadastro-consulta' >
-        Adicionar instituição
+        {t('instituicoes.btAdd')}
       </a>
       {aux !== [] && <Table columns={columns} dataSource={aux} pagination={{ pageSize: 7 }}/>}
       <ModalAddInstituicao atualizaTela={atualizaTela} setAtualizaTela={setAtualizaTela} visibleAdd={visibleAdd} setVisibleAdd={setVisibleAdd} />

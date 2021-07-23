@@ -2,7 +2,9 @@
     "translation": {
         "errors": {
             "login" : "Usuário ou senha incorreto!",
-            "obrigatorio": "Campo é obrigatório!"
+            "obrigatorio": "Campo é obrigatório!",
+            "instituicoes": "Ocorreu um erro na listagem das instituições!",
+            "removeInstituicao":"Não foi possivel realizar a exclusão da instituição!"
         },
         "header":{
             "btEntrar": "Entrar no sistema"
@@ -82,6 +84,15 @@
             "btProxima": "próxima etapa",
             "btAnterior": "Etapa anterior",
             "btCadastrar": "Finalizar cadastro"
+        },
+        "instituicoes": {
+            "title": "Instituições:",
+            "msg":{
+                "add": "Instituição incluída com sucesso!",
+                "remove": "Instituição removida com sucesso!",
+                "edit": "instituição editada com sucesso!"
+            },
+            "btAdd": "Adicionar instituição"
         }
 
     }
