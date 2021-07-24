@@ -1,0 +1,30 @@
+.centralizador-div{
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  align-items: baseline; /* centraliza conteudo na linha*/
+}
+
+.centralizador-div label {
+  margin-right: 5px;
+}
+
+.centralizador-div input {
+  width: 100%;
+  border:1px solid rgba(2, 2, 2, 0.342);
+}
+
+.form-dados-basicos h4 {
+  text-align: center;
+}
+
+.mostrar-form{
+  display: inline;
+}
+
+.esconder-form {
+  display: none;
+}
+input {
+  text-align: center;
+}

@@ -1,0 +1,132 @@
+.dados-instituicao {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.dados-instituicao h3 {
+  text-align: center;
+}
+
+.dados-instituicao span {
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: rgba(95, 124, 16, 0.658);
+}
+
+.dados-instituicao .dados-parte-um,
+.dados-instituicao .dados-parte-dois {
+  border-top: 1px solid rgba(0, 0, 0, 0.212);
+  text-align: center;
+  padding-top: 10px;
+}
+
+.dados-parte-um p,
+.dados-parte-dois p {
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.329);
+}
+
+.select-instituicoes {
+  width: 100%;
+  font-size: 16px;
+  font-family: 'Times New Roman', Times, serif;
+  text-transform: uppercase;
+  min-height: 35px;
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.103);
+  border-radius: 4px;
+  text-shadow: black;
+}
+
+.select-instituicoes {
+  text-align: center;
+  text-align-last: center;
+}
+
+.dados-instituicao p { 
+  text-transform: uppercase;
+}
+
+.icon {
+  display: inline-block;
+  width: 25px!important;
+}
+
+.div-cedula-campo {
+  display: flex;
+  justify-items: center;
+  justify-content: stretch;
+  align-items: center;
+}
+.div-cedula-campo input {
+  width: 80%;
+  margin-bottom: 10px;
+}
+
+.icon-remover {
+  margin-left: 20px;
+  color: red!important;
+}
+
+.tooltip {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.separador-elemento {
+  width: 100%;
+  display: flex;
+  justify-items: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.separador-elemento .div-comum-direita {
+  text-align: right;
+  width: 100%;
+}
+
+.separador-elemento .div-comum-direita label,
+.separador-elemento .div-comum-esquerda label {
+  display: inline-block;
+  width: 100%;
+}
+
+.separador-elemento .div-comum-direita label {
+  text-align: right!important;
+}
+
+.separador-elemento .div-comum-esquerda label {
+  text-align: left!important;
+}
+
+.separador-elemento .div-comum-esquerda {
+  text-align: left;
+  width: 100%;
+}
+
+.align-center {
+  width: 100%!important;
+  text-align: center;
+}
+
+.color-white {
+  color: white!important;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .ajuste-input-responsivo {
+    width: 100%!important;
+  }
+  .separador-elemento {
+    display: inline-block!important;
+  }
+
+  .separador-elemento .div-comum-direita label,
+  .separador-elemento .div-comum-esquerda label {
+    text-align: center!important;
+  }
+}

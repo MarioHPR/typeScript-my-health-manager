@@ -35,11 +35,6 @@ const Instituicoes: React.FC = () => {
     }
   },[notifyError, t]);
 
-  useEffect(()=>{
-    getInstituicoes();
-    // eslint-disable-next-line
-  },[setInstituicoes, atualizaTela]);
-
   const handleDelete = useCallback(async (evt) => {
     try{
       await deletarInstituicao(evt);
@@ -54,6 +49,11 @@ const Instituicoes: React.FC = () => {
   const toggleCollapsed = () => {
     setCollapsed2(!collapsed2);
   };
+
+  useEffect(()=>{
+    getInstituicoes();
+    // eslint-disable-next-line
+  },[setInstituicoes, atualizaTela]);
 
   return (
     <>

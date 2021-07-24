@@ -10,6 +10,7 @@ export interface ConsultaRequest {
 }
 
 export interface ConsultaResponse {
+    id: number;
     nomeMedico: string;
     dataConsulta: string;
     diagnostico: string;
