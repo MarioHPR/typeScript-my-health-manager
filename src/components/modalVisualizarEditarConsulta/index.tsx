@@ -110,12 +110,13 @@ export default function ModalVisualizarEditarConsulta({visibleEdit, setVisibleEd
     values.numero = values.numero !== undefined ? ( values.numero.includes('_') ? values.numero.replaceAll("_", "") : values.numero) : instituicao?.enderecoDTO.numero;
     values.contatoUmInstituicao = values.contatoUmInstituicao !== undefined ? values.contatoUmInstituicao : instituicao?.contatoDTO.contatoUm;
     values.contatoDoisInstituicao = values.contatoDoisInstituicao !== undefined ? values.contatoDoisInstituicao : instituicao?.contatoDTO.contatoDois;
-    values.idInstituicao = (values.cidade !== undefined && flg) ? (instituicao?.id || 0) : 0;
+    values.idInstituicao = flg ? 0 : instituicao?.id;
     values.dataConsulta = values.dataConsulta !== undefined ? values.dataConsulta : consulta?.dataConsulta;
     values.diagnostico = values.diagnostico !== undefined ? values.diagnostico : consulta?.diagnostico;
     values.nomeMedico = values.nomeMedico !== undefined ? values.nomeMedico : consulta?.nomeMedico;
     values.prescricao = values.prescricao !== undefined ? values.prescricao : consulta?.prescricao;
     values.idArquivo = consulta?.idArquivo !== null ? consulta?.idArquivo : 0;
+
     (doc !== null && doc !== undefined) ? uploadDoc(values) : editarConsultaSelecionada(values);
   }
 

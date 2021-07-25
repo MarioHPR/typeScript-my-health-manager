@@ -84,7 +84,7 @@ export default function ModalAddConsulta({visibleAdd, setVisibleAdd, setAtualiza
     values.numero = values.numero !== undefined ? ( values.numero.includes('_') ? values.numero.replaceAll("_", "") : values.numero) : instituicao?.enderecoDTO.numero;
     values.contatoUmInstituicao = values.contatoUmInstituicao !== undefined ? values.contatoUmInstituicao : instituicao?.contatoDTO.contatoUm;
     values.contatoDoisInstituicao = values.contatoDoisInstituicao !== undefined ? values.contatoDoisInstituicao : instituicao?.contatoDTO.contatoDois;
-    values.idInstituicao = (values.cidade !== undefined && flg) ? (instituicao?.id || 0) : 0;
+    values.idInstituicao = instituicao?.id !== undefined && flg ? instituicao?.id : 0;
     values.idArquivo = 0;
     doc !== null ? uploadDoc(values) : cadastrarConsulta(values);
   }
