@@ -1,0 +1,13 @@
+.container-modal-editar {
+  width: 50%!important;
+}
+
+.ant-modal-body {
+  padding: 0!important;
+}
+
+@media (max-width: 950px) {
+  .container-modal-editar {
+    width: 100%!important;
+  }
+}

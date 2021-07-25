@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Table, Popconfirm } from 'antd';
 import './style.css';
 import ModalAddConsulta from '../modalAddConsulta';
-// import ModalVisualizarEditarConsulta from '../components/modalVisualizarEditarConsulta';
+import ModalVisualizarEditarConsulta from '../modalVisualizarEditarConsulta';
 
 import { DeleteOutlined, EditOutlined ,EyeOutlined } from '@ant-design/icons';
 import { ConsultaResponse } from '../../interfaces/Consulta';
@@ -27,7 +27,7 @@ export default function TableDados( { consultas, atualizaTela, setAtualizaTela }
   const [ aux, setAux ] = useState<TableConsulta[]>([]);
   const [ visibleEdit, setVisibleEdit ] = useState<boolean>(false);
   const [ visibleAdd, setVisibleAdd ] = useState<boolean>(false);
-  const [ idConsulta, setIdConsulta ] = useState<number>();
+  const [ idConsulta, setIdConsulta ] = useState<number>(0);
   const [ flgEdit, setFlgEdit ] = useState<number>(0);
 
   const notifyError = useCallback((texto:string) => {
@@ -98,7 +98,7 @@ export default function TableDados( { consultas, atualizaTela, setAtualizaTela }
         </a>
         {aux !== [] && <Table columns={columns} dataSource={aux} pagination={{ pageSize: 7 }}/>}
         <ModalAddConsulta atualizaTela={atualizaTela} setAtualizaTela={setAtualizaTela} visibleAdd={visibleAdd} setVisibleAdd={setVisibleAdd} />
-        {/* <ModalVisualizarEditarConsulta atualizaTela={atualizaTela} setAtualizaTela={setAtualizaTela} idConsulta={idConsulta} visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} flgEdit={flgEdit} /> */}
+        <ModalVisualizarEditarConsulta atualizaTela={atualizaTela} setAtualizaTela={setAtualizaTela} idConsulta={idConsulta} visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} flgEdit={flgEdit} />
       </div>
   )
 }

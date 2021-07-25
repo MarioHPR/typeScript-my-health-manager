@@ -37,7 +37,6 @@ const TableListaRestricoes: React.FC<Iprops> = ({atualizaTela, setAtualizaTela, 
       })
     } );
     setAux(a);
-    console.log(restricoes)
   },[restricoes]);
 
   const [form] = Form.useForm();

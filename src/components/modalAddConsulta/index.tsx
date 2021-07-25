@@ -1,10 +1,7 @@
-import { useState, useEffect, useCallback, ChangeEvent } from 'react';
+import { useState, useEffect, useCallback, ChangeEvent, useMemo } from 'react';
 import { Modal, Row, Form, Button, Col } from 'antd';
 import { toast } from 'react-toastify';
 import FormularioDadosBasicos from '../formDadosBasicos';
-// import ConsultaApi from '../../models/consultaApi';
-// import InstituicaoApi from '../../models/instituicaoApi';
-// import ArquivoApi from '../../models/arquivoApi';
 import './style.css';
 import TextArea from 'antd/lib/input/TextArea';
 import { InstituicaoResponse } from '../../interfaces/Instituicao';
@@ -12,7 +9,6 @@ import { buscarInstituicoes } from '../../controllers/instituicaoApi';
 import { uploadArquivo } from '../../controllers/arquivoApi';
 import { criarConsulta } from '../../controllers/consultaApi';
 import { ConsultaRequest } from '../../interfaces/Consulta';
-
 interface Iprops {
   visibleAdd: boolean;
   setVisibleAdd: Function;
@@ -23,10 +19,11 @@ interface Iprops {
 export default function ModalAddConsulta({visibleAdd, setVisibleAdd, setAtualizaTela, atualizaTela}:Iprops) {
   const [form] = Form.useForm();
   const [ flg, setFlg ] = useState(false);
-  const [ dataConsulta, setDataConsulta ] = useState<string>('');
+  const [ nomeCampoContatoUm ] = useState<string>("contatoUmInstituicao");
+  const [ nomeCampoContatoDois ] = useState<string>("contatoDoisInstituicao");
   const [ instituicao, setInstituicao ] = useState<InstituicaoResponse>();
   const [ instituicoes, setInstituicoes ] = useState<InstituicaoResponse[]>([]);
-  const [ doc, setDoc ] = useState<any| null>(0);
+  const [ doc, setDoc ] = useState<FileList| null>(null);
 
   const notifyError = useCallback((texto:string) => {
     toast.error(texto);
@@ -49,6 +46,11 @@ export default function ModalAddConsulta({visibleAdd, setVisibleAdd, setAtualiza
     form.resetFields()
   },[form]);
 
+  const file = useMemo(() => {
+    if (!doc?.length) return null;
+    return doc[0];
+  }, [doc]);
+
   const cadastrarConsulta = useCallback(async (valores) => {
     try{
       await criarConsulta( valores );
@@ -65,51 +67,26 @@ export default function ModalAddConsulta({visibleAdd, setVisibleAdd, setAtualiza
 
   const uploadDoc = useCallback(async (request: ConsultaRequest) => {
     try{
-      const resp = await uploadArquivo(doc);
-      setDoc(resp);
+      const resp = await uploadArquivo(file);
       request.idArquivo = resp;
       cadastrarConsulta(request)
     } catch(error){
-
+      notifyError("Erro ao salvar documento!");
     }
-  }, [doc, cadastrarConsulta]);
+  }, [cadastrarConsulta, file, notifyError]);
 
   const onFinish = (values: any) => {
-    // const { bairro, cep, cidade, rua, contatoDois, contatoUm, nomeinstituicao } = values;
-    // const { diagnostico, prescricaoMedica, nomeMedico } = values;
-    // if(values.numero && values.numero.includes('_')){
-    //   values.numero = values.numero.replaceAll("_", "");
-    // }
-    // const { numero } = values;
-    // const request: ConsultaRequest = {
-    //   "dadosInstituicao": {
-    //     "contatoDTO": {
-    //       "contatoDois": contatoDois || '',
-    //       "contatoUm": contatoUm || '',
-    //       "id": 0
-    //     },
-    //     "enderecoDTO": {
-    //       "bairro": bairro || '',
-    //       "cep": cep || '',
-    //       "cidade": cidade || '',
-    //       "id": 0,
-    //       "numero": numero !== undefined ? numero : 0,
-    //       "rua": rua || ''
-    //     },
-    //     "id": (bairro && flg) ? 0 : instituicao.id || 0,
-    //     "nome": nomeinstituicao || ''
-    //   },
-    //   "dataConsulta": dataConsulta || '',
-    //   "diagnostico": diagnostico || '',
-    //   "prescricao": prescricaoMedica || '',
-    //   "nomeMedico": nomeMedico || '',
-    //   "idArquivo": doc ? doc : 0
-    // };
-
-    // doc ? (
-    //   uploadDoc(request)
-    //  ) : cadastrarConsulta(request);
-    
+    values.nomeInstituicao = values.nomeInstituicao !== undefined ? values.nomeInstituicao : instituicao?.nome;
+    values.bairro = values.bairro !== undefined ? values.bairro : instituicao?.enderecoDTO.bairro;
+    values.cidade = values.cidade !== undefined ? values.cidade : instituicao?.enderecoDTO.cidade;
+    values.cep = values.cep !== undefined ? values.cep : instituicao?.enderecoDTO.cep;
+    values.rua = values.rua !== undefined ? values.rua : instituicao?.enderecoDTO.rua;
+    values.numero = values.numero !== undefined ? ( values.numero.includes('_') ? values.numero.replaceAll("_", "") : values.numero) : instituicao?.enderecoDTO.numero;
+    values.contatoUmInstituicao = values.contatoUmInstituicao !== undefined ? values.contatoUmInstituicao : instituicao?.contatoDTO.contatoUm;
+    values.contatoDoisInstituicao = values.contatoDoisInstituicao !== undefined ? values.contatoDoisInstituicao : instituicao?.contatoDTO.contatoDois;
+    values.idInstituicao = (values.cidade !== undefined && flg) ? (instituicao?.id || 0) : 0;
+    values.idArquivo = 0;
+    doc !== null ? uploadDoc(values) : cadastrarConsulta(values);
   }
 
   const executaAcao = ( aux: any ) => {
@@ -153,7 +130,7 @@ export default function ModalAddConsulta({visibleAdd, setVisibleAdd, setAtualiza
                         rules={ [ { required: true, message: `Data da consulta é Obrigatório!` } ] }
                       >
                         {
-                          <input className='input-modal margin-bottom ajuste-input-responsivo' type='date' value={'dataExame'} onChange={ evt => setDataConsulta(evt.target.value)}/>
+                          <input className='input-modal margin-bottom ajuste-input-responsivo' type='date' value={'dataExame'} onChange={ () => {}}/>
                         }
                       </Form.Item>
                     </div>
@@ -182,7 +159,7 @@ export default function ModalAddConsulta({visibleAdd, setVisibleAdd, setAtualiza
                   </div>
                 
                   <div id="" className={flg ? 'mostrar-form' : 'esconder-form'}>
-                    <FormularioDadosBasicos flg={flg} setFlg={setFlg} />
+                    <FormularioDadosBasicos flg={flg} setFlg={setFlg} contatoUm={nomeCampoContatoUm} contatoDois={nomeCampoContatoDois}/>
                   </div>
                   
                   <Form.Item name='diagnostico' label='Diagnóstico:'
@@ -190,13 +167,12 @@ export default function ModalAddConsulta({visibleAdd, setVisibleAdd, setAtualiza
                   >
                     <input className='input-modal align-center'/>
                   </Form.Item>
-                  <Form.Item name='prescricaoMedica' label='Prescrição médica:'
+                  <Form.Item name='prescricao' label='Prescrição médica:'
                     rules={ [ { required: true, message: `Prescrição médica: Obrigatório!` } ] }
                   >
                     <TextArea rows={5} />
                   </Form.Item>
 
-                  {/* <input type='file' onChange={evt => setDoc(evt.target.files[0] !== null)} /> */}
                   <input type='file' onChange={handleInputFileChange} />
                   <>
                     <Row>

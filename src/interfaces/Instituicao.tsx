@@ -1,5 +1,5 @@
-import { ContatoRequest } from "./Contato";
-import { EnderecoRequest } from "./Endereco";
+import { ContatoRequest, INITIAL_CONTATO_REQUEST } from "./Contato";
+import { EnderecoRequest, INITIAL_ENDERECO_REQUEST } from "./Endereco";
 
 export interface InstituicaoRequest {
     id: number;
@@ -20,4 +20,11 @@ export interface TableInstituicao {
     nome: string;
     cidade: string;
     contato: string;
-  }
+}
+
+export const INITIAL_INSTITUICAO_REQUEST: InstituicaoRequest = {
+    id: 0,
+    nome: "",
+    contatoDTO: INITIAL_CONTATO_REQUEST,
+    enderecoDTO: INITIAL_ENDERECO_REQUEST
+}

@@ -7,9 +7,11 @@ import { Link } from 'react-router-dom';
 interface Iprops {
   flg:boolean;
   setFlg: Function;
+  contatoUm: string;
+  contatoDois: string;
 }
 
-export default function FormularioDadosBasicos( { flg, setFlg }:Iprops ) {
+export default function FormularioDadosBasicos( { flg, setFlg, contatoUm, contatoDois }:Iprops ) {
   return (
     <div className="form-dados-basicos" >
       <Row>
@@ -17,7 +19,7 @@ export default function FormularioDadosBasicos( { flg, setFlg }:Iprops ) {
           <h4>Dados básicos da instituição:</h4>
         </Col>
         <Col xs={{span:24}} md={{span:12}}>
-          <InputFormItem mask={''} name={'nomeinstituicao'} titulo={'Nome:'} key={'nomeinstituicao'} classe={'input-modal margin-bottom'}
+          <InputFormItem mask={''} name={'nomeInstituicao'} titulo={'Nome:'} key={'nomeinstituicao'} classe={'input-modal margin-bottom'}
             classContainer={''} tipo={ 'text' } dica={ 'ex: Hospital...' } value={ '' } flgRequired={flg} />
         </Col>
         <Col xs={{span:24}} md={{span:12}}>
@@ -44,11 +46,11 @@ export default function FormularioDadosBasicos( { flg, setFlg }:Iprops ) {
           <h4>Contatos da instituição:</h4>
         </Col>
         <Col xs={{span:24}} md={{span:12}}>
-          <InputFormItem mask={'(99) 9 9999-9999'} name={'contatoUm'} titulo={'1° Contato:'} key={'contatoUm'} classe={'input-modal margin-bottom'}
+          <InputFormItem mask={'(99) 9 9999-9999'} name={contatoUm} titulo={'1° Contato:'} key={'contatoUm'} classe={'input-modal margin-bottom'}
             classContainer={''} tipo={ 'text' } dica={ 'ex: (99) 9 9999-9999' } value={ '' } flgRequired={flg} />
         </Col>
         <Col xs={{span:24}} md={{span:12}}>
-          <InputFormItem mask={'(99) 9 9999-9999'} name={'contatoDois'} titulo={'2° Contato::'} key={'contatoDois'} classe={'input-modal margin-bottom'}
+          <InputFormItem mask={'(99) 9 9999-9999'} name={contatoDois} titulo={'2° Contato::'} key={'contatoDois'} classe={'input-modal margin-bottom'}
             classContainer={''} tipo={ 'text' } dica={ 'ex: (99) 9 9999-9999' } value={ '' } flgRequired={flg} />
         </Col>
         <Col span={24}>

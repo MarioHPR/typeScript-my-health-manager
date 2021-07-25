@@ -13,10 +13,10 @@ export const downloadArquivo = async (id: number) => {
   const t = (response:any) => {
     let fileName = "arquivo.pdf";
     if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE variant
-        window.navigator.msSaveOrOpenBlob(new Blob([response.data], {type: 'application/octet-stream'}),
+        window.navigator.msSaveOrOpenBlob(new Blob([response], {type: 'application/octet-stream'}),
             fileName);
     } else {
-        const url = window.URL.createObjectURL(new Blob([response.data], {type: 'application/octet-stream'}));
+        const url = window.URL.createObjectURL(new Blob([response], {type: 'application/octet-stream'}));
         const link = document.createElement('a');
         link.href = url;
         link.setAttribute('download', fileName);
