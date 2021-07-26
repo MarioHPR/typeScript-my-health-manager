@@ -9,15 +9,21 @@ export interface DadosExameRequest {
     valor: string[];
     dadosInstituicao: InstituicaoRequest;
 }
-
 export interface DadosExameEditRequest {
-    tipoExame: string;
-    idArquivo: number;
+    bairro: string;
+    cep: string;
+    cidade: string;
+    contatoDoisInstituicao: string;
+    contatoUmInstituicao: string;
     dataExame: string;
-    dadosInstituicao: InstituicaoRequest;
+    idArquivo: number;
+    idInstituicao: number;
+    nomeInstituicao: string;
+    numero: number;
     parametros: ItemValorExameRequest[];
+    rua: string;
+    nomeExame: string;
 }
-
 export interface DadosExameResponse {
     id: number;
     nomeExame: string;

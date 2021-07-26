@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { Modal, Row, Form, Button, Col, notification } from 'antd';
+import { Modal, Row, Form, Button, Col } from 'antd';
 import FormularioDadosBasicos from '../formDadosBasicos';
 import './style.css';
 import { WarningOutlined } from '@material-ui/icons';
@@ -130,7 +130,7 @@ export default function ModalExame({visibleModal, setVisibleModal, idExame, edit
     } catch(error){
       notifyError("Erro ao salvar documento!");
     }
-  }, [file, notifyError]);
+  }, [file, handleEditarExame, notifyError]);
 
   const onFinish = (values:any) => {
     values.nomeInstituicao = values.nomeInstituicao !== undefined ? values.nomeInstituicao : instituicao?.nome;
@@ -143,61 +143,11 @@ export default function ModalExame({visibleModal, setVisibleModal, idExame, edit
     values.contatoDoisInstituicao = values.contatoDoisInstituicao !== undefined ? values.contatoDoisInstituicao : instituicao?.contatoDTO.contatoDois;
     values.idInstituicao = instituicao?.id !== undefined && !flg ? instituicao?.id : 0;
     values.idArquivo = 0;
-    values.tipoExame = exame?.nomeExame;
+    values.nomeExame = exame?.nomeExame;
     values.dataExame = dataExame;
     values.parametros = parametros;
     
     doc !== null && idExame ? uploadDoc(idExame, values) : idExame && handleEditarExame(idExame, values);
-    console.log(values)
-
-    //   const { bairro, cep, cidade, rua, contatoDois, contatoUm, nomeinstituicao } = values;
-    //   const auth = localStorage.getItem("token-gerenciador-security");
-
-    //   doc && arquivsoApi.uploadArquivo(doc, auth).then( resp =>{
-    //     if(resp.status === 200){
-    //       setDoc(resp.data);
-    //     }
-    //   });
-
-    //   if(values.numero && values.numero.includes('_')){
-    //     values.numero = values.numero.replaceAll("_", "");
-    //   }
-
-    //   const request = {
-    //   "dadosInstituicao": {
-    //     "contatoDTO": {
-    //       "contatoDois": contatoDois || '',
-    //       "contatoUm": contatoUm || '',
-    //       "id": 0
-    //     },
-    //     "enderecoDTO": {
-    //       "bairro": bairro || '',
-    //       "cep": cep || '',
-    //       "cidade": cidade || '',
-    //       "email": '',
-    //       "emeail": '',
-    //       "id": 0,
-    //       "numero": values.numero || 0,
-    //       "rua": rua || ''
-    //     },
-    //     "id": (bairro && flg) ? 0 : instituicao.id || 0,
-    //     "nome": nomeinstituicao || ''
-    //   },
-    //   "dataExame": dataExame || '',
-    //   "idArquivo": doc || 0,
-    //   "parametros": parametros,
-    //   "tipoExame": tipoExame || ''
-    // };
-    
-    // examseApi.editarExame( idExame, request, auth).then( resp => { 
-    //     if(resp.status === 200){
-    //       let aux = atualizaTela + 1;
-    //       setAtualizaTela(aux);
-    //       setVisibleModal(false)
-    //       flg && setFlg(!flg);
-    //       onReset();
-    //       openNotificationWithIcon("success", 'Edição', 'Exame editado com sucesso!');
-    //     } } );
   }
 
   const executaAcao = ( aux:any ) => {
