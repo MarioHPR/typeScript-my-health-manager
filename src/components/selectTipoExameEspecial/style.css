@@ -1,0 +1,39 @@
+.div-add-item {
+  display: flex;
+  flex-Wrap: nowrap;
+  padding: 8; 
+}
+
+.input-add-item {
+  flex: auto;
+}
+
+.link-add-item {
+  flex: none;
+  padding: 8px;
+  display: block;
+  cursor: pointer;
+  color: white;
+  background:#1890ff;
+  border-radius: 3px;
+}
+
+.espacamento-top {
+  margin-top: 20px;
+}
+.diminuir-botton {
+  margin-bottom: -40px;
+}
+
+.espacamento-left {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.select-tipo-exame {
+  min-width: 250px;
+  max-width: 100%;
+  font-size: 16px;
+  font-family: 'Times New Roman', Times, serif;
+  text-transform: uppercase;
+}

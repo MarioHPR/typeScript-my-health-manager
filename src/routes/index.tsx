@@ -4,7 +4,7 @@ import Route from './Route';
 import Login from '../pages/login';
 import Cadastro from '../pages/cadastro';
 import Consulta from '../pages/Consulta';
-// import TipoExame from '../pages/TipoExame';
+import TipoExame from '../pages/TipoExame';
 import Home from '../pages/home';
 import Instituicoes from '../pages/instituicoes';
 import ListaTipoExames from '../pages/listaTipoExames';
@@ -19,10 +19,7 @@ const Routes: React.FC = () => {
             <Route path="/instituicoes" exact component={ Instituicoes } isPrivate />
             <Route path="/listaTipoExames" exact component={ ListaTipoExames } isPrivate />
             <Route path="/consultas" exact component={ Consulta } isPrivate />
-            {/*
             <Route path="/tipoExames" exact component={ TipoExame } isPrivate />
-            
-            */}
             <Redirect to="/" /> 
         </Switch>
     )

@@ -1,0 +1,27 @@
+.bt-add-inst {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:white;
+  width: 100%;
+  text-align: center;
+  border: 1px solid white;
+  border-radius: 0.4vh;
+  padding: 0.4vh;
+}
+.text-center {
+  text-align: center;
+}
+.bt-add-inst:hover {
+  background: rgba(0, 0, 0, 0.199);
+  color: rgb(31, 184, 245);
+  font-weight: bold;
+}
+
+.bt-add-inst span {
+  font-size: 18px;
+}
+
+.bt-add-inst .sibolo-add {
+  font-size: 25px;
+}
