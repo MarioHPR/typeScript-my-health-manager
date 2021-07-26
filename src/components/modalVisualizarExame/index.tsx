@@ -115,7 +115,38 @@ export default function ModalExame({visibleModal, setVisibleModal, idExame, edit
     }
   }, [file, notifyError]);
 
+  const handleEditarExame = useCallback(async (idExame: number, request:any) => {
+    try{
+      await editarExame( idExame, request);
+      let aux = atualizaTela + 1;
+      setAtualizaTela(aux);
+      setVisibleModal(false)
+      flg && setFlg(!flg);
+      onReset();
+      notifySucess("Exame editado com sucesso!");
+    } catch(error){
+      notifyError("Não foi possível salvar as alterações no exame!")
+    }
+
+  }, [atualizaTela, setAtualizaTela, setVisibleModal, flg, onReset, notifySucess, notifyError]);
+
   const onFinish = (values:any) => {
+    values.nomeInstituicao = values.nomeInstituicao !== undefined ? values.nomeInstituicao : instituicao?.nome;
+    values.bairro = values.bairro !== undefined ? values.bairro : instituicao?.enderecoDTO.bairro;
+    values.cidade = values.cidade !== undefined ? values.cidade : instituicao?.enderecoDTO.cidade;
+    values.cep = values.cep !== undefined ? values.cep : instituicao?.enderecoDTO.cep;
+    values.rua = values.rua !== undefined ? values.rua : instituicao?.enderecoDTO.rua;
+    values.numero = values.numero !== undefined ? ( values.numero.includes('_') ? values.numero.replaceAll("_", "") : values.numero) : instituicao?.enderecoDTO.numero;
+    values.contatoUmInstituicao = values.contatoUmInstituicao !== undefined ? values.contatoUmInstituicao : instituicao?.contatoDTO.contatoUm;
+    values.contatoDoisInstituicao = values.contatoDoisInstituicao !== undefined ? values.contatoDoisInstituicao : instituicao?.contatoDTO.contatoDois;
+    values.idInstituicao = instituicao?.id !== undefined && !flg ? instituicao?.id : 0;
+    values.idArquivo = 0;
+    values.tipoExame = exame?.nomeExame;
+    values.dataExame = dataExame;
+    values.parametros = parametros;
+    idExame && handleEditarExame(idExame, values);
+    console.log(values)
+
     //   const { bairro, cep, cidade, rua, contatoDois, contatoUm, nomeinstituicao } = values;
     //   const auth = localStorage.getItem("token-gerenciador-security");
 
