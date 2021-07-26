@@ -107,14 +107,6 @@ export default function ModalExame({visibleModal, setVisibleModal, idExame, edit
     return doc[0];
   }, [doc]);
 
-  const uploadDoc = useCallback(async () => {
-    try{
-      const resp = await uploadArquivo(file);
-    } catch(error){
-      notifyError("Erro ao salvar documento!");
-    }
-  }, [file, notifyError]);
-
   const handleEditarExame = useCallback(async (idExame: number, request:any) => {
     try{
       await editarExame( idExame, request);
@@ -130,6 +122,16 @@ export default function ModalExame({visibleModal, setVisibleModal, idExame, edit
 
   }, [atualizaTela, setAtualizaTela, setVisibleModal, flg, onReset, notifySucess, notifyError]);
 
+  const uploadDoc = useCallback(async (idExame: number, request: any) => {
+    try{
+      const resp = await uploadArquivo(file);
+      request.idArquivo = resp;
+      handleEditarExame(idExame, request);
+    } catch(error){
+      notifyError("Erro ao salvar documento!");
+    }
+  }, [file, notifyError]);
+
   const onFinish = (values:any) => {
     values.nomeInstituicao = values.nomeInstituicao !== undefined ? values.nomeInstituicao : instituicao?.nome;
     values.bairro = values.bairro !== undefined ? values.bairro : instituicao?.enderecoDTO.bairro;
@@ -144,7 +146,8 @@ export default function ModalExame({visibleModal, setVisibleModal, idExame, edit
     values.tipoExame = exame?.nomeExame;
     values.dataExame = dataExame;
     values.parametros = parametros;
-    idExame && handleEditarExame(idExame, values);
+    
+    doc !== null && idExame ? uploadDoc(idExame, values) : idExame && handleEditarExame(idExame, values);
     console.log(values)
 
     //   const { bairro, cep, cidade, rua, contatoDois, contatoUm, nomeinstituicao } = values;
