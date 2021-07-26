@@ -3,7 +3,7 @@ import { Table, Popconfirm } from 'antd';
 import { DeleteOutlined, EditOutlined ,EyeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import ModalAddExame  from '../modalAddExame';
-// import ModalExame from '../modalVisualizarExame';
+import ModalExame from '../modalVisualizarExame';
 import { removerExame, buscarExamePorId } from '../../controllers/exameApi';
 import { DadosExameResponse } from '../../interfaces/Exame';
 import { useCallback } from 'react';
@@ -111,7 +111,7 @@ export default function TableTipoExame( { exames, setAtualizaTela, atualizaTela 
       </a>
       {aux !== [] && <Table columns={columns} dataSource={aux} pagination={{ pageSize: 10 }}/>}
       <ModalAddExame atualizaTela={atualizaTela} setAtualizaTela={setAtualizaTela} visibleAdd={visible} setVisibleAdd={setVisible}/>
-      {/* <ModalExame atualizaTela={atualizaTela} setAtualizaTela={setAtualizaTela}  idExame={idExame} visibleModal={visibleModalGeral} setVisibleModal={setVisibleModalGeral} editarVisualizar={flgEditarVisualizar} /> */}
+      <ModalExame atualizaTela={atualizaTela} setAtualizaTela={setAtualizaTela}  idExame={idExame} visibleModal={visibleModalGeral} setVisibleModal={setVisibleModalGeral} editarVisualizar={flgEditarVisualizar} />
     </div>
   )
 }

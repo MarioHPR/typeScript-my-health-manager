@@ -7,7 +7,7 @@ export const buscarTodosExames = async () => {
 }
 
 export const buscarExamePorId = async (id:number) => {
-  const response: DadosExameResponse = (await ApiService.get(`api/exame/buscar-todos/${id}`)).data;
+  const response: DadosExameResponse = (await ApiService.get(`api/exame/buscar-dados/${id}`)).data;
   return response;
 }
 
