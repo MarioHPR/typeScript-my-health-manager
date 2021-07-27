@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback, ChangeEvent, useMemo} from 'react';
-import { Modal, Row, Form, Button, Col, Space, Select } from 'antd';
+import { Modal, Row, Form, Button, Col } from 'antd';
 import { MinusCircleOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { WarningOutlined } from '@material-ui/icons';
-import { Input, Tooltip } from '@material-ui/core';
+import { Tooltip } from '@material-ui/core';
 import { toast } from 'react-toastify';
 import InputBasicoModal from '../inputBasicoModal';
 import SelectTipoExameEspecial from '../selectTipoExameEspecial';
@@ -13,8 +13,6 @@ import { uploadArquivo } from '../../controllers/arquivoApi';
 import { InstituicaoResponse } from '../../interfaces/Instituicao';
 import { buscarInstituicoes } from '../../controllers/instituicaoApi';
 import { DadosTipoExameResponse } from '../../interfaces/TipoExame';
-import { Option } from 'antd/lib/mentions';
-
 interface Iprops {
   visibleAdd: boolean;
   setVisibleAdd: Function;
@@ -26,6 +24,8 @@ interface NovoCampo {
   id: number;
   campo: string;
   valor: string;
+  idItemCampoExame: number;
+  idItemValorExame: number;
 }
 
 export default function ModalAddExame({visibleAdd, setVisibleAdd, setAtualizaTela, atualizaTela }:Iprops) {
@@ -33,7 +33,6 @@ export default function ModalAddExame({visibleAdd, setVisibleAdd, setAtualizaTel
   const [ flg, setFlg ] = useState(false);
   const [ itensExame, setItensExame ] = useState<DadosTipoExameResponse[]>([]);
   const [ itensDoExame, setItensDoExame ] = useState<NovoCampo[]>([]);
-  const [ nomeExame, setNomeExame ] = useState<string>('');
   const [ doc, setDoc ] = useState<FileList| null>(null);
   const [ instituicao, setInstituicao ] = useState<InstituicaoResponse>();
   const [ instituicoes, setInstituicoes ] = useState<InstituicaoResponse[]>([]);
@@ -105,40 +104,35 @@ export default function ModalAddExame({visibleAdd, setVisibleAdd, setAtualizaTel
   }, [cadastrarExame, file, notifyError]);
 
   const onFinish = (values: any) => {
-    console.log("exame ",itensDoExame)
-    console.log("veio isso ", values)
-    // values.tipoExame = nomeExame;
-    // values.parametros = itensDoExame ? itensDoExame : [];
-    // const auth = localStorage.getItem("token-gerenciador-security");
-    // if(values.numero && values.numero.includes('_')){
-    //   values.numero = values.numero.replaceAll("_", "");
-    // }
-    // const arquivoApi = new ArquivoApi();
-    // doc ? arquivoApi.uploadArquivo(doc, auth).then( resp =>{
-    //   if(resp.status === 200){
-    //     setDoc(resp.data);
-    //     values.idArquivo = resp.data;
-    //     cadastrarExame(values, auth);
-    //   }
-    // }) : cadastrarExame(values, auth);
-    
-    // itensDoExame.map( i => i.valor = '');
-    // removeOuAtualiza(null);
+
+    values.nomeInstituicao = values.nomeInstituicao !== undefined ? values.nomeInstituicao : instituicao?.nome;
+    values.bairro = values.bairro !== undefined ? values.bairro : instituicao?.enderecoDTO.bairro;
+    values.cidade = values.cidade !== undefined ? values.cidade : instituicao?.enderecoDTO.cidade;
+    values.cep = values.cep !== undefined ? values.cep : instituicao?.enderecoDTO.cep;
+    values.rua = values.rua !== undefined ? values.rua : instituicao?.enderecoDTO.rua;
+    values.numero = values.numero !== undefined ? ( values.numero.includes('_') ? values.numero.replaceAll("_", "") : values.numero) : instituicao?.enderecoDTO.numero;
+    values.contatoUmInstituicao = values.contatoUmInstituicao !== undefined ? values.contatoUmInstituicao : instituicao?.contatoDTO.contatoUm;
+    values.contatoDoisInstituicao = values.contatoDoisInstituicao !== undefined ? values.contatoDoisInstituicao : instituicao?.contatoDTO.contatoDois;
+    values.idInstituicao = instituicao?.id !== undefined && !flg ? instituicao?.id : 0;
+    values.idArquivo = 0;
+    values.parametros = itensDoExame;
+
+    doc !== null ? uploadDoc(values) : cadastrarExame(values);
   }
 
   const adicionar = () => {
     let arrayAux:any = itensDoExame !== undefined ? itensDoExame : []; 
-    let campoNovo = { id: 0, campo: '', valor: ''};
+    let campoNovo = { id: 0, campo: '', valor: '', idItemCampoExame: 0, idItemValorExame: 0};
     let aux = atualizaTela + 1;
     setAtualizaTela(aux);
     arrayAux.push(campoNovo);
     setItensDoExame(arrayAux);
   };
 
-  const removeOuAtualiza = useCallback((campo, valor) => {
-    const arrayAux:NovoCampo[] = itensDoExame.filter( item => (item.campo !== campo || item.valor !== valor) );
-    setItensDoExame(arrayAux);
-  },[itensDoExame]);
+  const removeOuAtualiza = (value:any) => {
+    let arrayAux = itensDoExame.filter( exame => exame.campo !== value);
+    setItensDoExame(arrayAux)
+  };
 
   useEffect(() => {
     onReset();
@@ -161,7 +155,7 @@ export default function ModalAddExame({visibleAdd, setVisibleAdd, setAtualizaTel
               <div className="dados-instituicao">
                 <div className='espacamento-top separador-elemento' >
                   <div className='div-comum-esquerda'>
-                    <SelectTipoExameEspecial atualizaTela={atualizaTela} itensExame={itensExame} setItensDoExame={setItensDoExame} setItensExame={setItensExame} setNomeExame={setNomeExame} />
+                    <SelectTipoExameEspecial atualizaTela={atualizaTela} itensExame={itensExame} setItensDoExame={setItensDoExame} setItensExame={setItensExame} />
                   </div>
                   <div className='div-comum-direita'>
                     <InputBasicoModal tipo='date' span={24} label='Data do exame' name={'dataExame'} />
@@ -192,89 +186,45 @@ export default function ModalAddExame({visibleAdd, setVisibleAdd, setAtualizaTel
                   <FormularioDadosBasicos flg={flg} setFlg={setFlg} contatoUm={nomeCampoContatoUm} contatoDois={nomeCampoContatoDois}/>
                 </div>
                 <h3>Dados do exame</h3>
-              { itensDoExame !== undefined ?
-                <Row>
-                  <Col span={24} className='dados-parte-um'>
-                  <Form.List name="parametros">
-                    {(fields, { add, remove }) => (
-                      <>
-                        {fields.map(field => (
-                          <Space key={field.key} align="baseline">
-                            <Form.Item
-                              noStyle
-                              shouldUpdate={(prevValues, curValues) =>
-                                prevValues.area !== curValues.area || prevValues.sights !== curValues.sights
-                              }
-                            >
-                              {() => (
-                                <Form.Item
-                                  {...field}
-                                  name={[field.name, 'campo']}
-                                  fieldKey={[field.fieldKey, 'campo']}
-                                  rules={[{ required: false, message: '' }]}
-                                >
-                                  <Input placeholder="Atributo"/>
-                                </Form.Item>
-                              )}
-                            </Form.Item>
-                            <Form.Item
-                              {...field}
-                              name={[field.name, 'valor']}
-                              fieldKey={[field.fieldKey, 'valor']}
-                              rules={[{ required: false, message: '' }]}
-                            >
-                              <Input placeholder="Atributo"/>
-                            </Form.Item>
-
-                            <MinusCircleOutlined onClick={() => remove(field.name)} />
-                          </Space>
-                        ))}
-
-                        <Form.Item>
-                          <Button type="dashed" onClick={() => add()} block >
-                          + Adicionar mais campos
-                          </Button>
-                        </Form.Item>
-                      </>
-                    )}
-                    </Form.List>
-                  {/* {
-                    itensDoExame.length > 0 && itensDoExame.map( exame => (
-                      exame.id !== undefined &&
-                      <div className='div-cedula-campo' itemID={`linha${exame.campo}`}>
-                        <Tooltip className='tooltip' title={`Atributo ${exame.campo}`}>
-                          <InfoCircleOutlined className='icon'/>
-                        </Tooltip>
-                        { exame.id !== 0 ?
-                          <input className='input-modal' placeholder="Campo atributo" value={exame.campo} readOnly/> :
-                          <input className='input-modal' placeholder="Campo atributo" onChange={evt => exame.campo = evt.target.value} />
-                        }
-                      </div>
-                    ) )
-                  } */}
-                  </Col>
-                  {/* <Col span={12} className='dados-parte-dois'>
-                  {
-                    itensDoExame.length > 0 && itensDoExame.map( exame => (
-                      exame.id !== undefined &&
-                      <div className='div-cedula-campo' itemID={`linha${exame.campo}`}>
-                        <Tooltip className='tooltip' title={`Digite o Valor referente ao atributo ${exame.campo}!`}>
-                          <InfoCircleOutlined className='icon'/>
-                        </Tooltip>
-                        <input className='input-modal' placeholder="Valor atributo" onChange={evt => exame.valor = evt.target.value} />
-                        <Tooltip className='tooltip' title={`Remover valor e atributo ${exame.campo}!`}>                               
-                          <MinusCircleOutlined  className='icon icon-remover' onClick={()=>removeOuAtualiza(exame.campo, exame.valor)}/>
-                        </Tooltip>
+                { itensDoExame.length > 0 ?
+                  <Row>
+                    <Col span={12} className='dados-parte-um'>
+                    {
+                      itensDoExame.map( exame => (
+                        <div className='div-cedula-campo'>
+                          <Tooltip className='tooltip' title={`Atributo ${exame.campo}`}>
+                            <InfoCircleOutlined className='icon' />
+                          </Tooltip>
+                          { exame.id !== 0 ?
+                            <input className='input-modal' placeholder="Campo atributo" value={exame.campo} readOnly/> :
+                            <input className='input-modal' placeholder="Campo atributo" onChange={evt => {exame.campo = evt.target.value;removeOuAtualiza(null)}} value={exame.campo} />
+                          }
+                          </div>
+                      ) )
+                    }
+                    </Col>
+                    <Col span={12} className='dados-parte-dois'>
+                    {
+                      itensDoExame.map( exame => (
+                        <div className='div-cedula-campo' itemID={`linha${exame.campo}`}>
+                          <Tooltip className='tooltip' title={`Digite o Valor referente ao atributo ${exame.campo}!`}>
+                            <InfoCircleOutlined className='icon'/>
+                          </Tooltip>
+                          <input className='input-modal' placeholder="Valor atributo" onChange={evt => {exame.valor = evt.target.value;removeOuAtualiza(null)}} value={exame.valor} />
+                          <Tooltip className='tooltip' title={`Remover valor e atributo ${exame.campo}!`}>                               
+                            <MinusCircleOutlined  className='icon icon-remover' onClick={()=>removeOuAtualiza(exame.campo)}/>
+                          </Tooltip>
                         </div>
                       ) )
                     }
-                    </Col> */}
-                </Row>
+                    </Col>
+                  </Row>
                 : <span><WarningOutlined />Não há dados registrados neste exame!</span>
-              }
-              {/* <Button type="dashed" onClick={() => adicionar()} block >
-                + Adicionar mais campos
-              </Button> */}
+                }
+                <Button type="dashed" onClick={() => adicionar()} block >
+                  + Adicionar mais campos
+                </Button>
+
               <input type='file' onChange={handleInputFileChange} />
               <Row>
                 <Col xs={{span:24}} md={{span:12}}>

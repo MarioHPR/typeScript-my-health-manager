@@ -2,12 +2,19 @@ import { InstituicaoRequest } from "./Instituicao";
 import { ItemValorExameRequest } from "./ItemValorExame";
 
 export interface DadosExameRequest {
-    nomeExame: string;
-    idArquivo: number;
+    bairro: string;
+    cep: string;
+    cidade: string;
+    contatoDoisInstituicao: string;
+    contatoUmInstituicao: string;
     dataExame: string;
-    campo: string[];
-    valor: string[];
-    dadosInstituicao: InstituicaoRequest;
+    idArquivo: number;
+    idInstituicao: number;
+    nomeInstituicao: string;
+    numero: number;
+    parametros: ItemValorExameRequest[];
+    rua: string;
+    nomeExame: string;
 }
 export interface DadosExameEditRequest {
     bairro: string;

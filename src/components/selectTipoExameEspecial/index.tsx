@@ -14,7 +14,6 @@ interface Iprops {
   setItensExame: Function;
   itensExame: DadosTipoExameResponse[];
   setItensDoExame: Function;
-  setNomeExame: Function;
 }
 
 interface NovoCampo {
@@ -23,7 +22,7 @@ interface NovoCampo {
   valor?: string;
 }
 
-export default function SelectTipoExameEspecial ( { atualizaTela, setItensExame, itensExame, setItensDoExame, setNomeExame }:Iprops ) {
+export default function SelectTipoExameEspecial ( { atualizaTela, setItensExame, itensExame, setItensDoExame }:Iprops ) {
 
   const { Option } = Select;
   const [ tipoExame, setTipoExame ] = useState<string[]>([]);
@@ -66,12 +65,10 @@ export default function SelectTipoExameEspecial ( { atualizaTela, setItensExame,
   return (
     <div className='centralizador-div espacamento-left'>
       <label>Tipo: </label>
-      <Form.Item name="tipoExame" hasFeedback
+      <Form.Item name="nomeExame" hasFeedback
             rules={ [ { required: true, message: 'Selecione uma tipo de exame!' } ] }
       >
         <Select
-        
-          // name='tipoExame'
           className='select-tipo-exame'
           placeholder="Exemplo: Raio X, Hemograma..."
           dropdownRender={menu => (
@@ -98,7 +95,6 @@ export default function SelectTipoExameEspecial ( { atualizaTela, setItensExame,
               return 0;
             });
             setItensDoExame(auxItens || undefined);
-            setNomeExame(evt || '');
           }
         }
         >
