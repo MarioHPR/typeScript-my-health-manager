@@ -1,9 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
-const baseURL = 'https:/back-geranciador-exames.herokuapp.com/';
-
 export const ApiService: AxiosInstance = axios.create({
-  baseURL: baseURL,
+  baseURL: process.env.REACT_APP_API_URL,
   headers: {
       'Content-Type': 'application/json;charset=UTF-8',
       "Access-Control-Allow-Origin": "*",
