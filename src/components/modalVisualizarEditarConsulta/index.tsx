@@ -209,8 +209,7 @@ export default function ModalVisualizarEditarConsulta({visibleEdit, setVisibleEd
                   >
                     <TextArea rows={5}  onChange={evt => consulta.prescricao = evt.target.value} defaultValue={consulta.prescricao} readOnly={flgEdit === 1 ? false : true} />
                   </Form.Item>
-
-                  <input type='file' onChange={handleInputFileChange} />
+                  <input type='file' hidden={flgEdit === 0} onChange={handleInputFileChange} />
                   {consulta.idArquivo !== 0 && <a href='#/' onClick={()=>downloadArquivoConsulta(consulta.idArquivo)} >Download do arquivo</a>}
                   <>{ flgEdit === 1 &&
                     <Row>
