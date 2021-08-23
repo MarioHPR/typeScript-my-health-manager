@@ -13,7 +13,7 @@ export const buscarTipoExame = async () => {
 }
 
 export const removerTipoExame = async (id: number) => {
-  await ApiService.get(`api/tipoExame/deletar/${id}`);
+  await ApiService.delete(`api/tipoExame/deletar/${id}`);
 }
 
 export const editarTipoExame = async (id: number, tipoExame: string) => {
