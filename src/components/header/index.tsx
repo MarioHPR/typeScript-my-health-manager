@@ -3,10 +3,13 @@ import './header.css';
 import PerfilUsuario from '../perfil';
 import { LoginOutlined } from '@ant-design/icons';
 import { useTranslation  } from 'react-i18next';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/auth';
 
 export default function Header (props: any) {
     const { mostrarLogin, btMostrarLogin } = props;
     const { t } = useTranslation();
+    const { user } = useContext(AuthContext);
 
     return (
       <>
@@ -20,7 +23,7 @@ export default function Header (props: any) {
                 {
                   btMostrarLogin ?
                     <p onClick={mostrarLogin} className='bt-login-abrir-caixa'>{t('header.btEntrar')} <LoginOutlined /></p> :
-                    <PerfilUsuario />
+                    user && <PerfilUsuario />
                 }
                </div>    
               </Col>

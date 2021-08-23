@@ -16,16 +16,11 @@ const FormularioDadosPessoais: React.FC<IpropStep> = ({ mudarStep, request }) =>
   const [ dataNascimento, setDataNascimento ] =useState<string>(request?.dataNascimento ? request.dataNascimento : "");
   const [ email, setEmail ] = useState<string>(request?.email ? request.email : "");
   const [ senha, setSenha ] = useState<string>(request?.senha ? request.senha : "");
-
-  // const [ mensagemDataNascimento, setMensagemDataNascimento ] = useState<string>("");
-  // const [ mensagemEmail, setMensagemEmail ] = useState<string>("");
-  // const [ mensagemSenha, setMensagemSenha ] = useState<string>("");
-
   
   const linha = ( item: any, i: any ) => {
     return (
-      <>
-      <label className="cor-branco">{item.titulo}<span className="cor-vermelho">*</span></label>
+      <div key={item.name + i}>
+        <label className="cor-branco">{item.titulo}<span className="cor-vermelho">*</span></label>
         <Form.Item name={ item.name }
             rules={ [ { required: true, message: `${ item.titulo } Obrigatório!` } ] }
         >
@@ -34,16 +29,13 @@ const FormularioDadosPessoais: React.FC<IpropStep> = ({ mudarStep, request }) =>
             : <input key={ i } className={ item.classe } type={ item.tipo } placeholder={ item.dica } defaultValue={item.value} onChange={(v) => item.funcao(v.target.value)}/>
           }
         </Form.Item>
-      </>
+      </div>
     )
   }
 
   const validaCampos = useMemo(() => {
     if(cpf !== "" && nome !== "" && email !== "" && 
     senha !== "" &&  dataNascimento !== "") {
-        // setMensagemDataNascimento(dataValida(dataNascimento));
-        // setMensagemEmail(verificaEmailInvalido(email));
-        // setMensagemSenha(verificaSenhaInvalida(senha));
         return true;
     }
     return false;
