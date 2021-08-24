@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+require("dotenv").config();
 
 export const ApiService: AxiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
