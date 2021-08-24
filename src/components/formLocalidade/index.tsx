@@ -7,6 +7,7 @@ import InputMask from 'react-input-mask';
 import Lista from '../lista';
 import { useTranslation } from 'react-i18next';
 import { IpropStep } from '../../interfaces/PropsSteps';
+import { Link } from 'react-router-dom';
 
 
 
@@ -66,6 +67,7 @@ const FormularioLocalidade: React.FC<IpropStep> = ({ mudarStep, request }) => {
             funcao={ ( item: any, i: any ) => linha( item, i ) }
           />
           <div className='container-botoes-navegacao'>
+            <Link to='/' className='botao-proxima-etapa botao-ir-login'>{t('steps.btLogin')}</Link>
             <Button onClick={() => mudarStep(0)} className="botao-etapa-anterior">{t('steps.btAnterior')}</Button>
             <Button type="primary" onClick={() => validaCampos && mudarStep(2)}  htmlType="submit" className="botao-proxima-etapa">{t('steps.btProxima')}</Button>
           </div>

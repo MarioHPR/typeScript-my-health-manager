@@ -8,6 +8,7 @@ import Lista from '../lista';
 import { useTranslation } from 'react-i18next';
 import { IpropStep } from '../../interfaces/PropsSteps';
 import { localeDateToISO } from '../../utils/Validador';
+import { Link } from 'react-router-dom';
 
 const FormularioDadosPessoais: React.FC<IpropStep> = ({ mudarStep, request }) => {
   const { t } = useTranslation();
@@ -80,6 +81,7 @@ const FormularioDadosPessoais: React.FC<IpropStep> = ({ mudarStep, request }) =>
         />
       </Form.Item>
       <div className='container-botoes-navegacao'>
+        <Link to='/' className='botao-proxima-etapa botao-ir-login'>{t('steps.btLogin')}</Link>
         <Button type="primary" onClick={() => validaCampos && mudarStep(1)} htmlType="submit"  className="botao-proxima-etapa">{t('steps.btProxima')}</Button>
       </div>
     </div>
